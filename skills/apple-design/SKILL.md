@@ -22,7 +22,7 @@ Design is evaluated against four needs:
 
 When deciding, start by identifying which need your design choice strengthens.
 
-## WWDC 2025 workflow: structure → navigation → content → visual
+## WWDC 2025-359 workflow: structure → navigation → content → visual
 
 The talk organizes design critique as a sequence. Use this when a product feels off even though the UI is “pretty.”
 
@@ -178,14 +178,23 @@ Use motion only if it serves at least one design principle above.
 - Remove anything that fails its mapping.
 - Add interaction detail (including motion) only after the design passes these checks.
 
+## Load deeper guidance by problem
+
+- For gesture-driven or animated interfaces, read [WWDC 2018-803](wwdc2018-803-fluid-interfaces.md). It contains implementation-level guidance for interruption, velocity handoff, momentum projection, springs, and soft boundaries.
+- For typography, translucent materials, depth, sound/haptics, reduced motion, or prototyping practice, read [Cross-cutting interface craft](cross-cutting-interface-craft.md).
+- For feature visibility and hidden gestures, read [WWDC 2021-10126](wwdc2021-10126-discoverability.md).
+- For voice, tone, labels, warnings, and recovery copy, read [WWDC 2024-10140](wwdc2024-10140-writing.md).
+- For product-quality critique, read [WWDC 2018-801](wwdc2018-801-qualities-of-great-design.md) and [WWDC 2019-802](wwdc2019-802-design-awards.md).
+
 ## Session supplements
 
 For maintainability and faster iteration, session-specific notes are split out:
 
 - WWDC 2017-802 (Design Principles): integrated into the core framework above.
-- WWDC 2025-10140 (Structure, navigation, content, and visual strategy): integrated into the workflow section above.
+- WWDC 2025-359 (Principles of Great Design): integrated into the workflow and principle framework above.
 - [WWDC 2024-10140 (Writing for Interfaces): UX voice and tone notes](wwdc2024-10140-writing.md)
 - [WWDC 2021-10126 (Making Interfaces Discoverable): feature visibility, gesture hints, behavior-based content organization, and personalization control](wwdc2021-10126-discoverability.md)
 - [WWDC 2019-802 (How to Win an Apple Design Award): innovation, trust, refinement, aesthetics, inclusion, and detail-oriented execution](wwdc2019-802-design-awards.md)
 - [WWDC 2018-803 (Designing Fluid Interfaces): responsiveness, spatial continuity, dynamic behavior, and gesture intent](wwdc2018-803-fluid-interfaces.md)
 - [WWDC 2018-801 (The Qualities of Great Design): quality as care, simplicity, timelessness, positive impact, and design process habits](wwdc2018-801-qualities-of-great-design.md)
+- [Cross-cutting interface craft: typography, materials, multisensory feedback, accessibility, and prototyping](cross-cutting-interface-craft.md)

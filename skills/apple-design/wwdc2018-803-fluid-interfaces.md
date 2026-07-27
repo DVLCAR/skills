@@ -146,3 +146,68 @@ Use this filter before accepting a motion change:
 - For ambiguous gestures (such as flicked floating panels), endpoint selection should use momentum projection, not only current position.
 - Project where the object would travel under known deceleration and pick destination based on that projected path.
 - This lets short gestures produce intended endpoints naturally and avoids over-travel or wrong-direction snaps.
+
+## Implementation mechanics retained from the original skill
+
+These mechanics translate the principles into web behavior. Use them only after the interaction model is sound.
+
+### Start from the presentation state
+
+- On interruption, begin from the object's current on-screen position, not its previous logical target.
+- Never lock input while a transition is running.
+- Retarget the active spring and preserve its current velocity; replacing it with a fresh zero-velocity animation creates a visible "brick wall."
+- For two-dimensional movement, treat X and Y as independent spring values so different axis velocities remain continuous.
+
+### Preserve grab position and release velocity
+
+- Use pointer capture so a drag continues when the pointer leaves the element.
+- Preserve the offset at which the object was grabbed; do not snap its center under the pointer.
+- Keep a short history of position and timestamps to estimate velocity.
+- At release, pass that velocity into the settling spring. If an API expects normalized velocity, use:
+
+```text
+relative velocity = gesture velocity / (target - current position)
+```
+
+### Project momentum before selecting a destination
+
+Choose the snap point nearest the projected endpoint, not nearest the release position:
+
+```js
+function project(initialVelocity, decelerationRate = 0.998) {
+  return (initialVelocity / 1000) *
+    decelerationRate / (1 - decelerationRate);
+}
+
+const projected = currentPosition + project(releaseVelocity);
+const target = nearestSnapPoint(projected);
+springTo(target, { velocity: releaseVelocity });
+```
+
+Use a lower deceleration rate, around `0.99`, for a shorter, snappier projection. Treat these as starting points to tune in context.
+
+### Tune springs as behavior
+
+- Think in damping and response rather than fixed duration.
+- Begin with critical damping (`1.0`) for neutral UI movement.
+- Use modest overshoot (around `0.8` damping) when a flick or throw supplies momentum.
+- Useful starting points from the session:
+
+| Interaction | Damping | Response |
+| --- | ---: | ---: |
+| Move or reposition | `1.0` | `0.4s` |
+| Rotation | `0.8` | `0.4s` |
+| Drawer or sheet | `0.8` | `0.3s` |
+
+### Use soft boundaries
+
+Progressively resist overshoot instead of stopping immediately:
+
+```js
+function rubberband(overshoot, dimension, constant = 0.55) {
+  return (overshoot * dimension * constant) /
+    (dimension + constant * Math.abs(overshoot));
+}
+```
+
+The exact curve is secondary. Preserve continuous feedback while making the boundary increasingly difficult to cross.
