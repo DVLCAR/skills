@@ -1,0 +1,29 @@
+{
+  "name": "emilkowalski-skills",
+  "version": "1.0.0",
+  "description": "Skills for Designers and Engineers.",
+  "author": {
+    "name": "Emil Kowalski",
+    "url": "https://emilkowal.ski/"
+  },
+  "homepage": "https://emilkowal.ski/skill",
+  "repository": "https://github.com/emilkowalski/skills",
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "skills",
+    "design",
+    "ux"
+  ],
+  "skills": [
+    "./skills/animate",
+    "./skills/animation-vocabulary",
+    "./skills/apple-design",
+    "./skills/emil-design-eng",
+    "./skills/find-animation-opportunities",
+    "./skills/improve-animations",
+    "./skills/pick-ui-library",
+    "./skills/prototype",
+    "./skills/review-animations"
+  ]
+}

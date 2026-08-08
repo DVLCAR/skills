@@ -1,0 +1,22 @@
+{
+  "name": "emilkowalski-skills",
+  "owner": {
+    "name": "Emil Kowalski",
+    "url": "https://emilkowal.ski/"
+  },
+  "description": "Skills for Designers and Engineers.",
+  "plugins": [
+    {
+      "name": "emilkowalski-skills",
+      "source": "./",
+      "description": "Skills for Designers and Engineers.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "design",
+        "ux"
+      ]
+    }
+  ]
+}
