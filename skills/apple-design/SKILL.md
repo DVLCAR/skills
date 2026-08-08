@@ -196,6 +196,20 @@ Three rules for combining senses (from *Designing Audio-Haptic Experiences*):
 2. **Harmony** — the visual, the sound, and the haptic must fire on the **same frame**. Latency between them destroys the illusion. Don't let a CSS transition lag the audio/haptic (Vibration API).
 3. **Utility** — add feedback only where it earns its place. Reserve haptics/sound for meaningful moments (success, error, commit, snap). Over-feedback trains users to ignore all of it.
 
+**On the web, the haptic leg usually isn't there.** The Vibration API (`navigator.vibrate`) is unsupported in Safari, iOS Safari, and Firefox — caniuse `vibration`, checked 2026-08-07, `n` through Safari 26.5/TP, iOS Safari 26.5, and Firefox 156. So on iPhone, the platform this section is translating from, **Harmony** has only two legs to fire on the same frame, and any "commit" you signalled with a vibration was never signalled at all.
+
+Treat haptics as progressive enhancement, not a channel you can rely on:
+
+```js
+// Enhancement only. Causality and Harmony must already be satisfied by the
+// visual and the sound — the vibration adds to them, it never carries them.
+if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+  navigator.vibrate(10);
+}
+```
+
+The rule that follows from **Utility**: never let a haptic be the *sole* signal that something succeeded, committed, or snapped. If removing `navigator.vibrate` from your code leaves an interaction with no feedback, that interaction is already broken for most of the people using it.
+
 ## 14. Reduced motion & accessibility
 
 Reduced motion doesn't mean *no* feedback — it means a gentler, non-vestibular equivalent. Respond to three independent signals and bake them into your components:
