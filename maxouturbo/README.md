@@ -19,7 +19,7 @@ Spécialité forte : **TMAX / Yamaha** (TMAX, XMAX, NMAX), du 50 cc au maxi-scoo
 
 - **Concept** : « minimalisme d'ingénieur » — l'atelier de prépa traité comme un plan technique.
 - **Style** : épuré & moderne, fond clair, beaucoup d'espace.
-- **Couleurs** : papier `#FBFBF9` · graphite `#16171A` · gris froid `#565962` ·
+- **Couleurs** : fond blanc `#FFFFFF` · graphite `#16171A` · gris froid `#565962` ·
   filet `#E6E5DF` · accent « turbo / titane brûlé » `#FF4A17` · vert stock `#1E874B`.
 - **Typographies** : *Archivo* (titres) · *Hanken Grotesk* (texte) · *IBM Plex Mono* (réf., cotes, prix).
 - **Signature** : hero = **courbe de banc de puissance** (avant/après) ; illustrations en dessin technique SVG (aucune image externe).
