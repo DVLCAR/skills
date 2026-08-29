@@ -11,6 +11,7 @@
      ============================================================ */
 
   :root {
+    color-scheme: light;   /* thème clair verrouillé — fond blanc pour tous */
     --paper:       #FFFFFF;
     --surface:     #FFFFFF;
     --surface-2:   #F3F2ED;
@@ -48,24 +49,8 @@
     --shadow-hover: 0 18px 40px -26px rgba(20,20,25,.45);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper:#121316; --surface:#191B1F; --surface-2:#212329;
-      --ink:#F1F0EA; --ink-2:#A7A9B0; --ink-3:#74777E;
-      --line:#2A2C31; --line-strong:#3B3E45;
-      --accent:#FF5E30; --accent-strong:#FF4A17; --accent-soft:#2A1912; --on-accent:#1A0E07;
-      --price-sale:#FF7A52; --ok:#46B978; --ok-soft:#16281D; --grid-line:#232529;
-      --shadow-hover: 0 18px 44px -24px rgba(0,0,0,.7);
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper:#121316; --surface:#191B1F; --surface-2:#212329;
-    --ink:#F1F0EA; --ink-2:#A7A9B0; --ink-3:#74777E;
-    --line:#2A2C31; --line-strong:#3B3E45;
-    --accent:#FF5E30; --accent-strong:#FF4A17; --accent-soft:#2A1912; --on-accent:#1A0E07;
-    --price-sale:#FF7A52; --ok:#46B978; --ok-soft:#16281D; --grid-line:#232529;
-    --shadow-hover: 0 18px 44px -24px rgba(0,0,0,.7);
-  }
+  /* Thème CLAIR uniquement : le fond reste blanc quel que soit le réglage
+     clair/sombre de l'appareil du visiteur. (Mode sombre ré-activable si besoin.) */
 
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }

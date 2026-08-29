@@ -43,7 +43,7 @@ onglets best-sellers / nouveautés / promos) · **occasions** (3 scooters) · ma
 
 Interactions : menu mobile, onglets produits, ajout au panier (compteur + toast),
 sélecteur de machine (mémorisé via `localStorage`), inscription newsletter.
-Thème clair/sombre géré via tokens CSS. Responsive.
+Thème clair uniquement (fond blanc, quel que soit le réglage clair/sombre de l'appareil). Responsive.
 
 > Contenu, prix, coordonnées et avis = **données de démonstration** à remplacer par les vraies infos.
 
