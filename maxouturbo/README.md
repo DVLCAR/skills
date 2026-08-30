@@ -3,69 +3,68 @@
 Boutique e-commerce **TMAX Shop**, opérée par **MaxouTurbo** (atelier scooter à
 Auriol / Marseille). Vente en ligne de **pièces & accessoires Yamaha TMAX** (560, 530, 500).
 
-Approche demandée : **~50 % repris du fonctionnement de TMAX Performance**
-(structure éprouvée, analysée depuis un export PDF de leur home) **+ ~50 % de
-fonctionnalités innovantes** pour une boutique en ligne, **adaptables sur Shopify**.
+Approche : **~50 % repris du fonctionnement de TMAX Performance** (structure éprouvée,
+analysée depuis l'export PDF de leur home) **+ ~50 % de fonctionnalités innovantes**,
+le tout avec une **vraie navigation e-commerce** (méga-menus + pages collection filtrables).
+Destination finale : **thème Shopify**.
+
+## Navigation (comme un vrai site marchand)
+
+- **Méga-menus déroulants** : clic sur « TMAX 560 / 530 / 500 » → panneau avec **toutes les
+  catégories** (échappement, freinage, variateur, esthétique, entretien, support tél,
+  accessoires) + une tuile promo ; clic sur « Les marques » → grille de marques.
+- **Pages collection** : chaque choix ouvre une **page produits** avec **filtres**
+  (catégorie, modèle, marque, prix), **tri**, fil d'ariane et compteur de résultats.
+- **Menu mobile en accordéon** (tactile) reprenant la même arborescence.
+- Tout est relié : sélecteur de véhicule, points « Explore ton TMAX », liens du footer et
+  logo mènent aux bons écrans. Catalogue de démonstration de ~28 produits.
 
 ## Le split 50 / 50
 
-**Repris de TMAX Performance (éprouvé)**
-- Barre d'annonce « Paiement en 4X sans frais »
-- **Sélecteur de véhicule** Modèle / Année / Catégorie + « Rechercher »
-- Section **En vedette** avec onglets TMAX 560 / 530 / 500
-- **Produit Nouveauté** avec pastille ronde animée + variante segmentée (façon « Atmo/Turbo »)
-- Section **Support téléphone** en carrousel
-- Rangée de **marques** (BCD, Puig, Malossi, Akrapovič, Quad Lock, Rizoma…)
-- **4 blocs réassurance** (Livraison gratuite, Service client 72h, Paiement sécurisé, Emballage protégé)
-- Footer À propos / Mentions légales + sélecteur **langue / devise**
-- Cartes produit : marque en capitales, **prix bleu**, ancien prix **barré rouge**, badge « Épuisé »
+**Repris de TMAX Performance** : barre « Paiement 4X », sélecteur véhicule, section En vedette
+(onglets 560/530/500), produit Nouveauté + variante segmentée, Support téléphone en carrousel,
+rangée de marques, **4 blocs réassurance**, footer À propos / Mentions légales + langue/devise,
+cartes produit (prix bleu, ancien prix barré rouge, badge « Épuisé »).
 
-**Innovant (nouveau, compatible Shopify)**
-1. **« Explore ton TMAX »** — schéma interactif du scooter avec **points cliquables**
-   (échappement, freinage, variateur, esthétique, cockpit) → collection.
-2. **« Compose ta prépa »** — **configurateur de pack** : coche des pièces, total en
-   direct, remise −10 %, « ajouter le pack au panier » (évolution de leur « Votre TMAX BCD »).
-3. **Panier tiroir (cart drawer)** avec **jauge « livraison offerte dès 50 € »**,
-   quantités et suppression.
-4. **Avis clients** (preuve sociale, note 4,8/5, achats vérifiés).
+**Innovant (compatible Shopify)** : **« Explore ton TMAX »** (schéma à points cliquables),
+**« Compose ta prépa »** (configurateur de pack, total live, −10 %), **panier tiroir** avec
+**jauge « livraison offerte 50 € »**, **avis clients vérifiés**, et la **navigation
+méga-menu + collections filtrables** ci-dessus.
 
 ## Direction artistique
 
-- Style e-commerce épuré, **fond blanc**, cartes arrondies, ombres douces, boutons pill.
-- Couleurs : blanc `#FFFFFF` · encre `#0E0E12` · **prix bleu `#1B63F2`** · barré rouge `#E5342A`.
-- Typo **Plus Jakarta Sans**. Thème **clair uniquement**.
+Fond **blanc**, cartes arrondies, ombres douces, boutons pill · encre `#0E0E12` ·
+**prix bleu `#1B63F2`** · barré rouge `#E5342A` · typo **Plus Jakarta Sans** · thème clair.
 
 ## Contenu
 
 ```
 maxouturbo/
 └── preview/
-    └── index.html   # Maquette page d'accueil (HTML/CSS/JS autonome)
+    └── index.html   # Maquette page d'accueil + pages collection (HTML/CSS/JS autonome)
 ```
 
-Interactions : menu mobile, onglets modèle, panier tiroir + jauge livraison, favoris,
-carrousel, hotspots, configurateur de pack, variante, sélecteur mémorisé (`localStorage`),
-newsletter. Responsive. Visuels produit en **SVG placeholders** (vraies photos sur Shopify).
-
-> Contenu, prix, marques et avis = **données de démonstration** à remplacer.
+Visuels produit en **SVG placeholders** (vraies photos sur Shopify). Contenu/prix = **démo**.
 
 ## Correspondance Shopify (pour la conversion en thème)
 
-| Élément maquette            | Équivalent Shopify Online Store 2.0 |
-|-----------------------------|-------------------------------------|
-| Sélecteur véhicule          | Section custom + `collection` filtrée par métachamps (modèle/année) |
-| En vedette / Support tél.   | Sections `featured-collection` (onglets = blocs collections) |
-| Produit Nouveauté + variante| Section `featured-product` + `product.variants` |
-| Configurateur de pack       | Section custom + `cart/add.js` (bundle / line items) |
-| Panier tiroir + jauge 50 €  | `cart-drawer` + `cart.total_price` vs seuil livraison |
-| Explore ton TMAX (hotspots) | Section custom avec blocs « point » (image + lien collection) |
-| Avis                        | App avis (Judge.me / Loox) ou section blocks |
-| Réassurance / footer        | Sections `multicolumn` + `footer` (blocks) |
+| Élément maquette              | Équivalent Shopify Online Store 2.0 |
+|-------------------------------|-------------------------------------|
+| Méga-menu par modèle          | `linklists` (menus) + `sections/header` mega-menu |
+| Pages collection + filtres    | `templates/collection.json` + Search & Discovery (facettes) |
+| Sélecteur véhicule            | Section custom + collections/métachamps modèle-année |
+| En vedette / Support tél.     | Sections `featured-collection` |
+| Produit Nouveauté + variante  | `featured-product` + `product.variants` |
+| Configurateur de pack         | Section custom + `cart/add.js` (bundle) |
+| Panier tiroir + jauge 50 €    | `cart-drawer` + `cart.total_price` |
+| Explore ton TMAX (hotspots)   | Section custom (blocs point → collection) |
+| Avis                          | App avis (Judge.me / Loox) |
+| Réassurance / footer          | `multicolumn` + `footer` |
 
 ## Étapes suivantes
 
-1. Valider cette direction (50/50).
-2. Décliner : page collection, fiche produit, panier, recherche.
+1. Valider la navigation + le design.
+2. Décliner la **fiche produit** et le **panier / checkout**.
 3. **Convertir en thème Shopify** : `sections/`, `templates/*.json`, `config/settings_schema.json`,
-   `locales/fr.json`, `assets/` — avec collections TMAX 560/530/500 et métachamps de compatibilité.
+   `locales/fr.json`, `assets/`, avec collections TMAX 560/530/500 et facettes de compatibilité.
 ```
