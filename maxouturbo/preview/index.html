@@ -1,0 +1,1029 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<title>TMAX Shop</title>
+<style>
+  /* ============================================================
+     TMAX Shop by MaxouTurbo — boutique e-commerce (aperçu Shopify)
+     Navigation : méga-menus déroulants + pages collection filtrables.
+     Fond blanc, thème clair. Design repris de la version validée.
+     ============================================================ */
+  :root{
+    color-scheme:light;
+    --bg:#FFFFFF;--surface:#FFFFFF;--tile:#F4F4F6;--tile-2:#ECECEF;
+    --ink:#0E0E12;--ink-2:#56565E;--ink-3:#9A9AA3;
+    --line:#EAEAEE;--line-2:#DCDCE2;
+    --blue:#1B63F2;--blue-ink:#1550D0;--blue-soft:#EAF1FE;
+    --red:#E5342A;--black:#0E0E12;--ok:#17924E;--amber:#F5A623;
+    --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1240px;--pad:clamp(1rem,4vw,2.25rem);--section-y:clamp(3rem,6.5vw,5.5rem);
+    --r-xl:28px;--r-lg:20px;--r:16px;--r-sm:12px;
+    --shadow-card:0 18px 40px -22px rgba(16,16,22,.20);--shadow-soft:0 8px 24px -12px rgba(16,16,22,.12);
+    --header-h:112px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  body.lock{overflow:hidden}
+  h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.05;text-wrap:balance}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  img,svg{display:block;max-width:100%}
+  ::selection{background:var(--blue);color:#fff}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+  [hidden]{display:none!important}
+  .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+
+  .btn{--_bg:var(--black);--_fg:#fff;--_bd:var(--black);display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:1em 1.6em;font-weight:700;font-size:.98rem;line-height:1;color:var(--_fg);background:var(--_bg);border:1.5px solid var(--_bd);border-radius:999px;cursor:pointer;transition:transform .14s ease,background .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+  .btn:active{transform:translateY(0)}
+  .btn svg{width:18px;height:18px}
+  .btn--dark:hover{--_bg:#26262e;--_bd:#26262e}
+  .btn--light{--_bg:#fff;--_fg:var(--ink);--_bd:var(--line-2)}
+  .btn--light:hover{--_bd:var(--ink)}
+  .btn--blue{--_bg:var(--blue);--_bd:var(--blue)}
+  .btn--blue:hover{--_bg:var(--blue-ink);--_bd:var(--blue-ink)}
+  .btn--block{width:100%}
+  .btn--sm{padding:.7em 1.1em;font-size:.86rem}
+  .link-arrow{display:inline-flex;align-items:center;gap:.5em;font-weight:700;font-size:.95rem}
+  .link-arrow svg{width:18px;height:18px;transition:transform .16s ease}
+  .link-arrow:hover svg{transform:translateX(4px)}
+
+  /* Announcement */
+  .topbar{background:var(--black);color:#fff}
+  .topbar__in{display:flex;gap:1.6em;align-items:center;justify-content:center;padding:9px var(--pad);font-size:.74rem;font-weight:600;letter-spacing:.04em;text-align:center}
+  .topbar__in .dot{color:var(--blue)}
+  @media(max-width:640px){.topbar__in span:nth-child(n+4){display:none}}
+
+  /* Header + mega */
+  .header{position:sticky;top:0;z-index:70;background:rgba(255,255,255,.9);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line);transition:box-shadow .2s ease}
+  .header.scrolled{box-shadow:0 10px 30px -24px rgba(16,16,22,.5)}
+  .header__in{display:flex;align-items:center;gap:1.25rem;height:74px}
+  .brand{display:inline-flex;flex-direction:column;line-height:1;cursor:pointer;background:none;border:0;padding:0;text-align:left}
+  .brand__row{font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
+  .brand__t{color:var(--ink)}.brand__s{color:var(--blue)}
+  .brand__by{font-size:.62rem;font-weight:600;letter-spacing:.06em;color:var(--ink-3);margin-top:3px;text-transform:uppercase}
+  .nav{display:flex;align-items:center;gap:.25rem;margin:0 auto}
+  .nav__toggle,.nav__link{display:inline-flex;align-items:center;gap:.35em;font-family:inherit;font-weight:700;font-size:.96rem;color:var(--ink);background:transparent;border:0;cursor:pointer;padding:9px 13px;border-radius:10px}
+  .nav__toggle:hover,.nav__link:hover{background:var(--tile)}
+  .nav__toggle svg{width:15px;height:15px;color:var(--ink-3);transition:transform .2s ease}
+  .nav__toggle[aria-expanded="true"]{background:var(--tile);color:var(--blue)}
+  .nav__toggle[aria-expanded="true"] svg{transform:rotate(180deg);color:var(--blue)}
+  .header__act{display:flex;align-items:center;gap:.15rem}
+  .iconbtn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;border-radius:12px;color:var(--ink);cursor:pointer;position:relative;transition:background .15s ease}
+  .iconbtn:hover{background:var(--tile)}
+  .iconbtn svg{width:22px;height:22px}
+  .cart-count{position:absolute;top:6px;right:6px;min-width:18px;height:18px;padding:0 4px;background:var(--blue);color:#fff;font-size:.64rem;font-weight:700;border-radius:999px;display:none;align-items:center;justify-content:center;line-height:1}
+  .cart-count.show{display:inline-flex}
+  .cart-count.bump{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.5)}100%{transform:scale(1)}}
+  .burger{display:none}
+
+  .mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(16,16,22,.35);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease,transform .18s ease,visibility .18s;z-index:70}
+  .mega.open{opacity:1;visibility:visible;transform:none}
+  .mega__panel{display:none}
+  .mega__panel.show{display:block}
+  .mega__in{max-width:var(--maxw);margin-inline:auto;padding:1.9rem var(--pad);display:grid;grid-template-columns:1.7fr .9fr;gap:2rem}
+  .mm__cats{display:grid;grid-template-columns:1fr 1fr;gap:.15rem;align-content:start}
+  .mm__cats .mm__h{grid-column:1/-1;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.6rem}
+  .mm__cat{display:flex;align-items:center;gap:.75rem;padding:.6rem;border-radius:12px;font-weight:600;font-size:.95rem;cursor:pointer;border:0;background:none;text-align:left;width:100%}
+  .mm__cat:hover{background:var(--tile);color:var(--blue)}
+  .mm__cat svg{width:22px;height:22px;color:var(--ink-2);flex:none}
+  .mm__cat:hover svg{color:var(--blue)}
+  .mm__cat.all{grid-column:1/-1;color:var(--blue);font-weight:700}
+  .mega__promo{background:var(--tile);border-radius:18px;padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:210px;position:relative;overflow:hidden}
+  .mega__promo .art{position:absolute;top:-10%;right:-6%;width:60%;opacity:.5;color:#c9c9d0}
+  .mega__promo .eyebrow{color:var(--blue)}
+  .mega__promo h5{font-size:1.15rem;margin:.4rem 0 .3rem}
+  .mega__promo p{font-size:.85rem;color:var(--ink-2);margin:0 0 1rem;position:relative}
+  .mega__in--brands{grid-template-columns:1fr}
+  .mm__brands{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}
+  .mm__brand{border:1px solid var(--line);border-radius:14px;padding:1.1rem .6rem;text-align:center;font-weight:800;font-size:.82rem;letter-spacing:.01em;cursor:pointer;background:#fff;transition:border-color .15s ease,color .15s ease,transform .15s ease}
+  .mm__brand:hover{border-color:var(--ink);color:var(--blue);transform:translateY(-2px)}
+  .mega-back{position:fixed;inset:0;background:rgba(14,14,18,.14);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s;z-index:65}
+  .mega-back.show{opacity:1;visibility:visible}
+
+  /* Mobile nav (accordéon) */
+  .mobile{position:fixed;inset:0 0 0 auto;width:min(360px,90vw);background:#fff;z-index:96;transform:translateX(100%);transition:transform .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px -30px rgba(0,0,0,.4)}
+  .mobile.show{transform:none}
+  .mobile__head{display:flex;align-items:center;justify-content:space-between;padding:1.1rem var(--pad);border-bottom:1px solid var(--line);font-weight:800}
+  .mobile__body{overflow-y:auto;padding:.5rem var(--pad) 2rem}
+  .macc__t{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:0;border-bottom:1px solid var(--line);padding:1rem 0;font-weight:700;font-size:1.05rem;cursor:pointer;color:var(--ink)}
+  .macc__t svg{width:18px;height:18px;transition:transform .2s ease;color:var(--ink-3)}
+  .macc.open .macc__t svg{transform:rotate(180deg);color:var(--blue)}
+  .macc__p{max-height:0;overflow:hidden;transition:max-height .28s ease}
+  .macc.open .macc__p{max-height:520px}
+  .macc__p a{display:block;padding:.6rem 0 .6rem 1rem;font-weight:600;color:var(--ink-2);font-size:.98rem}
+  .macc__p a:hover{color:var(--blue)}
+  .macc__solo{display:block;padding:1rem 0;border-bottom:1px solid var(--line);font-weight:700;font-size:1.05rem}
+  @media(max-width:1000px){.nav{display:none}.burger{display:inline-flex}}
+  @media(min-width:1001px){.mobile{display:none}}
+
+  /* Hero + finder */
+  .hero{padding-block:clamp(2.25rem,5vw,3.75rem) clamp(1.25rem,3vw,2rem);text-align:center}
+  .hero__in{display:flex;flex-direction:column;align-items:center}
+  .hero h1{font-size:clamp(2.1rem,5.4vw,3.7rem);margin:.9rem 0 0;max-width:16ch}
+  .hero h1 .hl{color:var(--blue)}
+  .hero__sub{color:var(--ink-2);font-size:clamp(1rem,1.4vw,1.15rem);max-width:52ch;margin:1.1rem 0 0}
+  .finder{width:100%;max-width:660px;margin:2rem auto 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow-card);padding:clamp(1.25rem,3vw,1.75rem);text-align:left}
+  .finder__grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem}
+  .finder__field label{display:block;font-weight:700;font-size:.82rem;margin-bottom:.45rem}
+  .select{position:relative}
+  .select select{appearance:none;-webkit-appearance:none;width:100%;background:var(--tile);color:var(--ink);border:1.5px solid transparent;border-radius:var(--r-sm);padding:.95em 2.6em .95em 1em;font-family:var(--font);font-size:.95rem;font-weight:600;cursor:pointer;transition:border-color .15s ease,background .15s ease}
+  .select select:hover{background:var(--tile-2)}
+  .select select:focus{outline:none;border-color:var(--blue);background:#fff}
+  .select select:required:invalid{color:var(--ink-3);font-weight:500}
+  .select::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;margin-top:-6px;border-right:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);transform:rotate(45deg);pointer-events:none}
+  .finder .btn{margin-top:1.1rem}
+  .finder__note{margin:.9rem 0 0;font-size:.84rem;color:var(--ink-2);display:none;align-items:center;gap:.5em}
+  .finder__note.show{display:flex}
+  .finder__note b{color:var(--ink)}
+  .finder__note button{background:none;border:0;color:var(--blue);font-weight:700;cursor:pointer;font-family:inherit;font-size:inherit;text-decoration:underline}
+  .hero__trust{margin-top:1.5rem;display:inline-flex;align-items:center;gap:.7rem;flex-wrap:wrap;justify-content:center;font-size:.85rem;color:var(--ink-2);font-weight:600}
+  .hero__trust .stars{color:var(--amber);letter-spacing:.06em}
+  .hero__trust .dot{color:var(--line-2)}
+  @media(max-width:560px){.finder__grid{grid-template-columns:1fr}}
+
+  /* Sections */
+  .sec{padding-block:var(--section-y)}
+  .sec--tight{padding-block:clamp(2rem,4vw,3.25rem)}
+  .sechead{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.6rem}
+  .sechead h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+  .sechead .right{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .mtabs{display:inline-flex;gap:.5rem;flex-wrap:wrap}
+  .mtab{border:0;cursor:pointer;background:var(--tile);color:var(--ink);font-weight:700;font-size:.92rem;padding:.7em 1.25em;border-radius:999px;transition:background .16s ease,color .16s ease}
+  .mtab[aria-selected="true"]{background:var(--black);color:#fff}
+  .arrows{display:inline-flex;gap:.5rem}
+  .arrows button{width:46px;height:46px;border-radius:999px;border:1.5px solid var(--line-2);background:#fff;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .15s ease,border-color .15s ease,transform .15s ease}
+  .arrows button:hover{background:var(--black);color:#fff;border-color:var(--black)}
+  .arrows button:active{transform:scale(.94)}
+  .arrows svg{width:20px;height:20px}
+
+  /* Product card */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+  .card{position:relative;display:flex;flex-direction:column}
+  .card__media{position:relative;aspect-ratio:1/1;background:var(--tile);border-radius:var(--r-lg);display:grid;place-items:center;color:#2c2c34;overflow:hidden;transition:background .18s ease}
+  .card:hover .card__media{background:var(--tile-2)}
+  .card__media .art{width:66%;height:66%}
+  .card__badge{position:absolute;top:12px;left:12px;background:rgba(14,14,18,.06);color:var(--ink-2);font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px}
+  .card__badge--promo{background:var(--blue);color:#fff}
+  .card__badge--new{background:var(--ink);color:#fff}
+  .card__fav{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-2);cursor:pointer;transition:color .15s ease}
+  .card__fav:hover,.card__fav.on{color:var(--red)}
+  .card__fav svg{width:17px;height:17px}
+  .card__add{position:absolute;bottom:12px;right:12px;width:44px;height:44px;border-radius:999px;background:var(--black);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;opacity:0;transform:translateY(6px);transition:opacity .16s ease,transform .16s ease,background .16s ease}
+  .card:hover .card__add{opacity:1;transform:none}
+  .card__add:hover{background:var(--blue)}
+  .card__add:active{transform:scale(.9)}
+  .card__add svg{width:20px;height:20px}
+  .card__info{padding:.9rem .2rem 0;display:flex;flex-direction:column;gap:.3rem}
+  .card__brand{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .card__title{font-size:.98rem;font-weight:700;line-height:1.25;cursor:pointer}
+  .card__price{margin-top:.2rem;display:flex;align-items:baseline;gap:.55rem}
+  .card__price .now{color:var(--blue);font-weight:800;font-size:1.02rem}
+  .card__price .was{color:var(--ink-3);font-weight:600;font-size:.84rem;text-decoration:line-through;text-decoration-color:var(--red)}
+  @media(max-width:1040px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.card__add{opacity:1;transform:none;width:40px;height:40px}}
+  @media(max-width:380px){.grid{grid-template-columns:1fr 1fr;gap:.9rem}}
+
+  .scroller{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:.5rem}
+  .scroller::-webkit-scrollbar{display:none}
+  .scroller .card{scroll-snap-align:start}
+  @media(min-width:1041px){.scroller{grid-auto-columns:calc((100% - 3 * 1.25rem)/4)}}
+  .brands__row{display:flex;gap:1rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.4rem}
+  .brands__row::-webkit-scrollbar{display:none}
+  .brandcard{flex:0 0 auto;min-width:150px;height:88px;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-soft);display:grid;place-items:center;font-weight:800;letter-spacing:.02em;color:var(--ink);cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,color .16s ease}
+  .brandcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-card);color:var(--blue)}
+
+  /* Explore hotspots */
+  .explore{background:linear-gradient(180deg,var(--tile) 0%,#fff 100%);border:1px solid var(--line);border-radius:var(--r-xl)}
+  .explore__in{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.5rem,4vw,3rem)}
+  .explore__copy h2{font-size:clamp(1.7rem,3.2vw,2.4rem)}
+  .explore__copy p{color:var(--ink-2);margin:.9rem 0 1.4rem;max-width:40ch}
+  .explore__chips{display:flex;flex-wrap:wrap;gap:.5rem}
+  .chip{font-size:.8rem;font-weight:700;background:#fff;border:1px solid var(--line-2);border-radius:999px;padding:.5em .9em;color:var(--ink-2)}
+  .stage{position:relative;aspect-ratio:16/10;display:grid;place-items:center;color:#2c2c34}
+  .stage__svg{width:100%;height:100%}
+  .hs{position:absolute;transform:translate(-50%,-50%);border:0;background:transparent;cursor:pointer;padding:0;z-index:2}
+  .hs__dot{display:block;width:20px;height:20px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 6px rgba(27,99,242,.18);position:relative}
+  .hs__dot::after{content:"";position:absolute;inset:0;border-radius:999px;background:var(--blue);animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite}
+  @keyframes ping{0%{transform:scale(1);opacity:.6}80%,100%{transform:scale(2.4);opacity:0}}
+  .hs__pop{position:absolute;bottom:150%;left:50%;transform:translateX(-50%) translateY(6px);width:190px;background:#fff;border:1px solid var(--line-2);border-radius:14px;box-shadow:var(--shadow-card);padding:.85rem;opacity:0;visibility:hidden;transition:opacity .16s ease,transform .16s ease;text-align:left;z-index:3}
+  .hs.open .hs__pop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .hs__pop b{display:block;font-size:.92rem}
+  .hs__pop span{display:block;font-size:.72rem;color:var(--ink-3);margin:2px 0 .6rem}
+  .hs__pop .go{color:var(--blue);font-weight:700;font-size:.82rem;cursor:pointer}
+  @media(max-width:820px){.explore__in{grid-template-columns:1fr}.stage{order:-1}}
+
+  /* Featured product */
+  .feature{background:var(--tile);border-radius:var(--r-xl);overflow:hidden}
+  .feature__in{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.5rem,4vw,3.25rem)}
+  .feature__media{position:relative;aspect-ratio:4/3;display:grid;place-items:center;color:#2c2c34}
+  .feature__media .art{width:74%}
+  .spin{position:absolute;top:4%;left:4%;width:clamp(84px,12vw,120px);height:clamp(84px,12vw,120px);color:var(--ink)}
+  .spin__svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+  .spin__ico{position:absolute;inset:0;display:grid;place-items:center}
+  .spin__ico svg{width:26%;height:26%}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .feature__body h3{font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.08;margin:.6rem 0 0}
+  .variant{margin:1.3rem 0 0}
+  .variant__label{font-size:.8rem;font-weight:700;color:var(--ink-2);margin-bottom:.5rem}
+  .seg{display:inline-flex;background:var(--tile-2);border-radius:999px;padding:4px}
+  .seg button{border:0;background:transparent;cursor:pointer;font-weight:700;font-size:.9rem;padding:.55em 1.1em;border-radius:999px;color:var(--ink-2);transition:background .16s ease,color .16s ease}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:var(--shadow-soft)}
+  .feature__price{display:flex;align-items:baseline;gap:.6rem;margin:1.3rem 0}
+  .feature__price .now{color:var(--blue);font-weight:800;font-size:1.5rem}
+  .feature__foot{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--line-2)}
+  @media(max-width:820px){.feature__in{grid-template-columns:1fr}.feature__media{order:-1}}
+
+  /* Builder */
+  .builder{background:var(--black);color:#fff;border-radius:var(--r-xl);overflow:hidden}
+  .builder__in{display:grid;grid-template-columns:1.4fr .9fr;gap:clamp(1.5rem,3vw,2.5rem);padding:clamp(1.5rem,4vw,3rem)}
+  .builder__head .eyebrow{color:#7ea6ff}
+  .builder__head h2{color:#fff;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:.5rem 0}
+  .builder__head p{color:rgba(255,255,255,.62);max-width:44ch}
+  .parts{margin-top:1.4rem;display:flex;flex-direction:column;gap:.6rem}
+  .part{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.12);border-radius:14px;padding:.85rem 1rem;cursor:pointer;transition:border-color .15s ease,background .15s ease}
+  .part:hover{border-color:rgba(255,255,255,.28)}
+  .part.on{border-color:var(--blue);background:rgba(27,99,242,.14)}
+  .part__check{width:24px;height:24px;border-radius:8px;border:1.5px solid rgba(255,255,255,.4);flex:none;display:grid;place-items:center;color:#fff;transition:background .15s ease,border-color .15s ease}
+  .part.on .part__check{background:var(--blue);border-color:var(--blue)}
+  .part__check svg{width:15px;height:15px;opacity:0;transition:opacity .15s ease}
+  .part.on .part__check svg{opacity:1}
+  .part__name{flex:1;font-weight:700;font-size:.95rem}
+  .part__name small{display:block;font-weight:500;font-size:.74rem;color:rgba(255,255,255,.5)}
+  .part__price{font-weight:800;font-variant-numeric:tabular-nums}
+  .builder__panel{background:#fff;color:var(--ink);border-radius:var(--r-lg);padding:1.5rem;align-self:start;position:sticky;top:calc(var(--header-h) + 8px)}
+  .builder__panel h3{font-size:1.1rem}
+  .bsum{margin:1rem 0;display:flex;flex-direction:column;gap:.5rem;font-size:.9rem}
+  .bsum .row{display:flex;justify-content:space-between;color:var(--ink-2)}
+  .bsum .row.save{color:var(--ok);font-weight:700}
+  .bsum .total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.2rem}
+  .bsum .total b{font-size:1.4rem;color:var(--blue)}
+  .builder__note{font-size:.74rem;color:var(--ink-3);margin-top:.8rem;text-align:center}
+  @media(max-width:820px){.builder__in{grid-template-columns:1fr}.builder__panel{position:static}}
+
+  /* Reviews */
+  .reviews__head{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+  .reviews__score{display:flex;align-items:center;gap:.6rem;font-weight:800}
+  .reviews__score .big{font-size:2rem}
+  .reviews__score .stars{color:var(--amber);font-size:1.1rem}
+  .reviews__score small{display:block;color:var(--ink-3);font-weight:600;font-size:.78rem}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .review{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;display:flex;flex-direction:column;gap:.8rem}
+  .review .stars{color:var(--amber)}
+  .review p{margin:0;font-size:.95rem}
+  .review__who{display:flex;align-items:center;gap:.6rem;margin-top:auto}
+  .avatar{width:36px;height:36px;border-radius:999px;background:var(--tile);display:grid;place-items:center;font-weight:800;font-size:.8rem;color:var(--ink-2)}
+  .review__who b{font-size:.85rem}
+  .review__who span{display:block;font-size:.72rem;color:var(--ink-3)}
+  .review__vf{margin-left:auto;font-size:.66rem;font-weight:700;color:var(--ok);background:#E7F4EC;padding:4px 8px;border-radius:999px}
+  @media(max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+  /* Reassurance */
+  .promise{border-top:1px solid var(--line)}
+  .promise__grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .promise__it{display:flex;gap:.9rem;padding:1.6rem var(--pad);border-left:1px solid var(--line)}
+  .promise__it:first-child{border-left:0}
+  .promise__it svg{width:26px;height:26px;color:var(--blue);flex:none}
+  .promise__it b{display:block;font-size:.92rem}
+  .promise__it span{font-size:.8rem;color:var(--ink-2)}
+  @media(max-width:820px){.promise__grid{grid-template-columns:1fr 1fr}.promise__it:nth-child(3){border-left:0}.promise__it:nth-child(n+3){border-top:1px solid var(--line)}}
+  @media(max-width:480px){.promise__grid{grid-template-columns:1fr}.promise__it{border-left:0;border-top:1px solid var(--line)}.promise__it:first-child{border-top:0}}
+
+  /* Newsletter */
+  .news{background:var(--black);color:#fff;border-radius:var(--r-xl);padding:clamp(1.75rem,4vw,3rem);text-align:center}
+  .news h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+  .news p{color:rgba(255,255,255,.7);margin:.7rem auto 0;max-width:46ch}
+  .news form{margin:1.6rem auto 0;display:flex;gap:.6rem;max-width:460px}
+  .news input{flex:1;min-width:0;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:1em 1.3em;font-family:var(--font);font-size:1rem}
+  .news input::placeholder{color:rgba(255,255,255,.5)}
+  .news input:focus{outline:none;border-color:var(--blue)}
+  .news small{display:block;margin-top:1rem;color:rgba(255,255,255,.5);font-size:.74rem}
+  .news__ok{margin-top:1.4rem;color:#fff;font-weight:700;display:none;align-items:center;justify-content:center;gap:.5em}
+  .news__ok.show{display:flex}
+  .news__ok svg{width:20px;height:20px;color:#6ee7a8}
+  @media(max-width:520px){.news form{flex-direction:column}}
+
+  /* Collection page */
+  .coll-top{padding-top:clamp(1.25rem,3vw,2rem)}
+  .crumb{font-size:.82rem;font-weight:600;color:var(--ink-3);display:flex;gap:.4em;flex-wrap:wrap;align-items:center}
+  .crumb a{color:var(--ink-2);cursor:pointer}.crumb a:hover{color:var(--blue)}
+  .crumb b{color:var(--ink)}
+  .coll-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:.7rem 0 1.4rem}
+  .coll-head h1{font-size:clamp(1.8rem,3.6vw,2.7rem)}
+  .coll-tools{display:flex;align-items:center;gap:.7rem}
+  .coll-count{color:var(--ink-2);font-weight:600;font-size:.9rem}
+  .filt-toggle{display:none}
+  .coll{display:grid;grid-template-columns:250px 1fr;gap:2rem;padding-bottom:var(--section-y)}
+  .filters{align-self:start;position:sticky;top:calc(var(--header-h) + 8px)}
+  .filters__head{display:none;align-items:center;justify-content:space-between;margin-bottom:1rem;font-weight:800;font-size:1.1rem}
+  .filters__head button{border:0;background:var(--tile);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1.1rem}
+  .fgroup{padding:1.1rem 0;border-top:1px solid var(--line)}
+  .fgroup:first-of-type{border-top:0;padding-top:0}
+  .fgroup h4{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.8rem}
+  .fcat button{display:flex;width:100%;justify-content:space-between;align-items:center;background:none;border:0;padding:.45rem 0;font-weight:600;font-size:.94rem;color:var(--ink-2);cursor:pointer}
+  .fcat button:hover{color:var(--ink)}
+  .fcat button[aria-current="true"]{color:var(--blue);font-weight:700}
+  .fcat button span{font-size:.76rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .fchips{display:flex;flex-wrap:wrap;gap:.45rem}
+  .fchip{border:1.5px solid var(--line-2);background:#fff;border-radius:999px;padding:.4em .85em;font-weight:700;font-size:.82rem;cursor:pointer;color:var(--ink-2);transition:all .14s ease}
+  .fchip[aria-pressed="true"]{background:var(--black);color:#fff;border-color:var(--black)}
+  .fbrands label{display:flex;align-items:center;gap:.6rem;padding:.35rem 0;font-size:.9rem;font-weight:600;color:var(--ink-2);cursor:pointer}
+  .fbrands input{width:18px;height:18px;accent-color:var(--blue);cursor:pointer}
+  .freset{margin-top:1rem;background:none;border:0;color:var(--blue);font-weight:700;cursor:pointer;font-size:.88rem;text-decoration:underline;padding:0}
+  .coll-empty{text-align:center;padding:3rem 1rem;color:var(--ink-2);font-weight:600}
+  .coll-empty button{color:var(--blue);border:0;background:none;cursor:pointer;font-weight:700;text-decoration:underline}
+  @media(max-width:820px){
+    .coll{grid-template-columns:1fr}
+    .filt-toggle{display:inline-flex}
+    .filters{position:fixed;inset:0 0 0 auto;width:min(340px,88vw);background:#fff;z-index:96;transform:translateX(100%);transition:transform .3s cubic-bezier(.3,.8,.3,1);padding:1.25rem var(--pad);overflow-y:auto;box-shadow:-20px 0 60px -30px rgba(0,0,0,.4)}
+    .filters.open{transform:none}
+    .filters__head{display:flex}
+  }
+
+  /* Cart drawer */
+  .overlay{position:fixed;inset:0;background:rgba(14,14,18,.45);z-index:90;opacity:0;transition:opacity .25s ease}
+  .overlay.show{opacity:1}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:#fff;z-index:97;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.3,.8,.3,1);box-shadow:-20px 0 60px -30px rgba(0,0,0,.4)}
+  .drawer.show{transform:none}
+  .drawer__head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem;border-bottom:1px solid var(--line)}
+  .drawer__head h3{font-size:1.15rem}
+  .drawer__close{width:40px;height:40px;border-radius:12px;border:0;background:var(--tile);cursor:pointer;display:grid;place-items:center}
+  .drawer__close svg{width:20px;height:20px}
+  .ship{padding:1rem 1.25rem;border-bottom:1px solid var(--line);background:var(--blue-soft)}
+  .ship__txt{font-size:.82rem;font-weight:600;margin-bottom:.5rem}
+  .ship__txt b{color:var(--blue-ink)}
+  .ship__bar{height:8px;border-radius:999px;background:#fff;overflow:hidden;border:1px solid var(--line-2)}
+  .ship__fill{height:100%;width:0;background:var(--blue);border-radius:999px;transition:width .4s ease}
+  .drawer__items{flex:1;overflow-y:auto;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.9rem}
+  .drawer__empty{color:var(--ink-3);text-align:center;margin-top:3rem;font-weight:600}
+  .ditem{display:flex;gap:.9rem;align-items:center}
+  .ditem__img{width:56px;height:56px;border-radius:12px;background:var(--tile);flex:none;display:grid;place-items:center;color:#2c2c34}
+  .ditem__img svg{width:60%}
+  .ditem__main{flex:1;min-width:0}
+  .ditem__name{font-size:.85rem;font-weight:700;line-height:1.2}
+  .ditem__price{font-size:.82rem;color:var(--blue);font-weight:800;margin-top:2px}
+  .qty{display:inline-flex;align-items:center;gap:.5rem;margin-top:.4rem;border:1px solid var(--line-2);border-radius:999px;padding:2px}
+  .qty button{width:24px;height:24px;border:0;background:transparent;cursor:pointer;font-weight:800;color:var(--ink-2);border-radius:999px}
+  .qty button:hover{background:var(--tile)}
+  .qty span{min-width:18px;text-align:center;font-weight:700;font-size:.82rem}
+  .ditem__rm{border:0;background:transparent;color:var(--ink-3);cursor:pointer;font-size:.72rem;text-decoration:underline;align-self:flex-start}
+  .drawer__foot{border-top:1px solid var(--line);padding:1.25rem;display:flex;flex-direction:column;gap:.8rem}
+  .drawer__sub{display:flex;justify-content:space-between;align-items:baseline;font-weight:800}
+  .drawer__sub .amt{font-size:1.3rem}
+  .drawer__foot small{color:var(--ink-3);font-size:.74rem;text-align:center}
+
+  /* Footer */
+  .footer{border-top:1px solid var(--line);padding-top:clamp(2.5rem,5vw,4rem)}
+  .footer__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem);padding-bottom:2.5rem}
+  .footer__brand p{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:34ch}
+  .socials{display:flex;gap:.5rem}
+  .socials a{width:40px;height:40px;border-radius:12px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink);transition:background .15s ease,color .15s ease,border-color .15s ease}
+  .socials a:hover{background:var(--black);color:#fff;border-color:var(--black)}
+  .socials svg{width:19px;height:19px}
+  .fcol h4{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1rem}
+  .fcol a{display:block;padding:.4rem 0;font-size:.92rem;color:var(--ink-2);font-weight:500;cursor:pointer}
+  .fcol a:hover{color:var(--blue)}
+  .footer__locale{display:flex;gap:.6rem;flex-wrap:wrap;padding-bottom:1.5rem}
+  .footer__locale .select select{padding:.7em 2.4em .7em .9em;font-size:.85rem;background:#fff;border:1px solid var(--line-2)}
+  .footer__bottom{border-top:1px solid var(--line);padding-block:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .footer__legal{font-size:.76rem;color:var(--ink-3);display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .footer__legal a:hover{color:var(--blue)}
+  .pays{display:flex;gap:.4rem}
+  .pay{font-size:.6rem;font-weight:800;letter-spacing:.03em;color:var(--ink-2);border:1px solid var(--line-2);border-radius:6px;padding:5px 7px}
+  @media(max-width:880px){.footer__top{grid-template-columns:1fr 1fr}.footer__brand{grid-column:1/-1}}
+  @media(max-width:480px){.footer__top{grid-template-columns:1fr}}
+
+  /* Chat + toast */
+  .chat{position:fixed;left:18px;bottom:18px;z-index:80;display:inline-flex;align-items:center;gap:.5em;background:#fff;border:1px solid var(--line-2);box-shadow:var(--shadow-card);border-radius:999px;padding:.7em 1.1em;font-weight:700;font-size:.9rem;cursor:pointer}
+  .chat svg{width:18px;height:18px;color:var(--blue)}
+  .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,160%);z-index:100;background:var(--black);color:#fff;border-radius:999px;padding:.85em 1.35em;font-size:.9rem;font-weight:600;display:inline-flex;align-items:center;gap:.55em;box-shadow:var(--shadow-card);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:calc(100vw - 32px)}
+  .toast.show{transform:translate(-50%,0)}
+  .toast svg{width:18px;height:18px;color:#6ee7a8;flex:none}
+
+  /* Reveal */
+  body.rv .reveal{opacity:0;transform:translateY(14px)}
+  body.rv .reveal.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}body.rv .reveal{opacity:1;transform:none}.spin__svg,.hs__dot::after{animation:none}}
+  .skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--black);color:#fff;padding:.7em 1.1em;border-radius:12px;transition:top .2s ease}
+  .skip:focus{top:12px}
+</style>
+
+<a class="skip" href="#main">Aller au contenu</a>
+
+<div class="topbar"><div class="topbar__in">
+  <span>Paiement en 4X sans frais</span><span class="dot">•</span>
+  <span>Livraison offerte dès 50&nbsp;€</span><span class="dot">•</span>
+  <span>Expédition 24/48&nbsp;h</span><span class="dot">•</span>
+  <span>SAV & compatibilité par MaxouTurbo</span>
+</div></div>
+
+<!-- HEADER + MEGA MENU -->
+<header class="header" id="header">
+  <div class="container header__in">
+    <button class="brand" data-nav="home" aria-label="TMAX Shop — accueil">
+      <span class="brand__row"><span class="brand__t">TMAX</span><span class="brand__s">Shop</span></span>
+      <span class="brand__by">by MaxouTurbo</span>
+    </button>
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="nav__toggle" data-mega="m560" aria-expanded="false" aria-haspopup="true">TMAX 560 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="nav__toggle" data-mega="m530" aria-expanded="false" aria-haspopup="true">TMAX 530 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="nav__toggle" data-mega="m500" aria-expanded="false" aria-haspopup="true">TMAX 500 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="nav__toggle" data-mega="brands" aria-expanded="false" aria-haspopup="true">Les marques <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="nav__link" data-nav="explore">Explore ton TMAX</button>
+    </nav>
+    <div class="header__act">
+      <button class="iconbtn" aria-label="Rechercher" data-open-all="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+      <button class="iconbtn" aria-label="Mon compte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.9 3.6-6 8-6s8 2.1 8 6"/></svg></button>
+      <button class="iconbtn" id="cartBtn" aria-label="Panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h2l1.5 12.5a1.5 1.5 0 0 0 1.5 1.3h8.2a1.5 1.5 0 0 0 1.5-1.2L21 8H6.2"/><circle cx="9.5" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg><span class="cart-count" id="cartCount">0</span></button>
+      <button class="iconbtn burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+
+  <!-- MEGA -->
+  <div class="mega" id="mega">
+    <!-- model panels are cloned/filled by JS into these -->
+    <div class="mega__panel" data-panel="m560"><div class="mega__in"><div class="mm__cats" data-model="TMAX 560"></div><div class="mega__promo"><svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="50" width="56" height="22" rx="11"/><path d="M86 55l12 3v6l-12 3M30 61H16"/></svg><span class="eyebrow">Best-seller 560</span><h5>Ligne Akrapovič titane</h5><p>Le son et la perf, montés à l'atelier.</p><button class="btn btn--dark btn--sm" data-model="TMAX 560" data-cat="echappement">Voir les échappements</button></div></div></div>
+    <div class="mega__panel" data-panel="m530"><div class="mega__in"><div class="mm__cats" data-model="TMAX 530"></div><div class="mega__promo"><svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="46" cy="60" r="22"/><circle cx="82" cy="62" r="14"/><path d="M46 38v44M82 48v28"/></svg><span class="eyebrow">Populaire 530</span><h5>Variateur Malossi</h5><p>Réveille ton TMAX 530.</p><button class="btn btn--dark btn--sm" data-model="TMAX 530" data-cat="transmission">Voir la transmission</button></div></div></div>
+    <div class="mega__panel" data-panel="m500"><div class="mega__in"><div class="mm__cats" data-model="TMAX 500"></div><div class="mega__promo"><svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M50 34h20v10H50zM46 44h28l-4 40a5 5 0 0 1-5 4H55a5 5 0 0 1-5-4z"/><path d="M52 58h16"/></svg><span class="eyebrow">Essentiel 500</span><h5>Packs entretien</h5><p>Garde ton 500 comme neuf.</p><button class="btn btn--dark btn--sm" data-model="TMAX 500" data-cat="entretien">Voir l'entretien</button></div></div></div>
+    <div class="mega__panel" data-panel="brands"><div class="mega__in mega__in--brands"><div><div class="mm__cats" style="margin-bottom:1rem"><span class="mm__h">Nos marques</span></div><div class="mm__brands" id="megaBrands"></div></div></div></div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<aside class="mobile" id="mobile" aria-label="Menu">
+  <div class="mobile__head"><span>Menu</span><button class="drawer__close" id="mClose" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="mobile__body" id="mBody"></div>
+</aside>
+
+<main id="main">
+
+  <!-- ========== HOME VIEW ========== -->
+  <div id="homeView">
+    <section class="hero">
+      <div class="container hero__in">
+        <span class="eyebrow reveal">Pièces & accessoires TMAX</span>
+        <h1 class="reveal">Tout pour ton <span class="hl">TMAX</span>, au meilleur prix.</h1>
+        <p class="hero__sub reveal">TMAX 560, 530 et 500. Choisis ta machine, on t'affiche les pièces compatibles. Montage possible à l'atelier MaxouTurbo.</p>
+        <form class="finder reveal" id="finder">
+          <div class="finder__grid">
+            <div class="finder__field"><label for="fMod">Modèle</label><div class="select"><select id="fMod" required><option value="" disabled selected>Sélectionner</option><option>TMAX 560</option><option>TMAX 530</option><option>TMAX 500</option></select></div></div>
+            <div class="finder__field"><label for="fYear">Année</label><div class="select"><select id="fYear"><option value="" disabled selected>Sélectionner</option><option>2022 → aujourd'hui</option><option>2020 – 2021</option><option>2017 – 2019</option><option>2015 – 2016</option><option>2012 – 2014</option><option>2008 – 2011</option><option>2001 – 2007</option></select></div></div>
+            <div class="finder__field"><label for="fCat">Catégorie</label><div class="select"><select id="fCat"><option value="">Toutes les catégories</option><option value="echappement">Échappement</option><option value="freinage">Freinage</option><option value="transmission">Variateur & transmission</option><option value="esthetique">Esthétique & carbone</option><option value="entretien">Entretien</option><option value="support">Support téléphone</option><option value="accessoires">Accessoires</option></select></div></div>
+          </div>
+          <button class="btn btn--dark btn--block" type="submit">Rechercher</button>
+          <p class="finder__note" id="finderNote"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Machine : <b id="finderVal"></b> — <button type="button" id="finderReset">changer</button></p>
+        </form>
+        <div class="hero__trust reveal"><span class="stars">★★★★★</span><span><b style="color:var(--ink)">4,8/5</b> · 1&nbsp;240 avis</span><span class="dot">•</span><span>Paiement 4x sans frais</span></div>
+      </div>
+    </section>
+
+    <section class="sec--tight container" id="explore">
+      <div class="explore reveal">
+        <div class="explore__in">
+          <div class="explore__copy">
+            <span class="eyebrow">Nouveau · interactif</span>
+            <h2>Explore ton TMAX</h2>
+            <p>Clique sur une zone de la moto pour voir les pièces compatibles. La bonne catégorie en un clic.</p>
+            <div class="explore__chips"><span class="chip">Échappement</span><span class="chip">Freinage</span><span class="chip">Variateur</span><span class="chip">Esthétique</span><span class="chip">Cockpit</span></div>
+          </div>
+          <div class="stage" role="group" aria-label="Schéma interactif du TMAX">
+            <svg class="stage__svg" viewBox="0 0 440 230" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="104" cy="178" r="46"/><circle cx="104" cy="178" r="15"/><circle cx="344" cy="178" r="46"/><circle cx="344" cy="178" r="15"/>
+              <path d="M150 178C150 152 130 140 104 140"/><path d="M290 178C290 152 310 140 344 140"/>
+              <path d="M72 140C58 120 70 106 94 104L166 102C176 86 192 82 210 82L262 82C276 64 300 60 314 66"/>
+              <path d="M94 120L176 118"/><path d="M166 134L262 132"/><path d="M314 66C326 82 322 112 300 134"/><path d="M314 66C338 56 350 76 342 98"/><path d="M300 70L326 52M320 52H346"/><path d="M300 104l14 6-14 6"/>
+            </svg>
+            <button class="hs" style="left:33%;top:64%" data-cat="transmission"><span class="hs__dot"></span><span class="hs__pop"><b>Variateur & transmission</b><span>Malossi · Polini · galets</span><span class="go">Voir les pièces →</span></span></button>
+            <button class="hs" style="left:62%;top:82%" data-cat="echappement"><span class="hs__dot"></span><span class="hs__pop"><b>Échappement</b><span>Akrapovič · SC-Project</span><span class="go">Voir les pièces →</span></span></button>
+            <button class="hs" style="left:78%;top:80%" data-cat="freinage"><span class="hs__dot"></span><span class="hs__pop"><b>Freinage</b><span>Brembo · disques · durites</span><span class="go">Voir les pièces →</span></span></button>
+            <button class="hs" style="left:70%;top:34%" data-cat="esthetique"><span class="hs__dot"></span><span class="hs__pop"><b>Esthétique & carbone</b><span>Bulles · carénages · BCD</span><span class="go">Voir les pièces →</span></span></button>
+            <button class="hs" style="left:80%;top:22%" data-cat="support"><span class="hs__dot"></span><span class="hs__pop"><b>Cockpit</b><span>Support tél · Quad Lock</span><span class="go">Voir les pièces →</span></span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec--tight container" aria-label="Nos marques">
+      <div class="brands__row reveal" id="homeBrands"></div>
+    </section>
+
+    <section class="sec container" id="vedette">
+      <div class="sechead reveal">
+        <h2>En vedette</h2>
+        <div class="right"><div class="mtabs" role="tablist" aria-label="Modèle" data-vitrine="vedette">
+          <button class="mtab" role="tab" aria-selected="true" data-model="TMAX 560">TMAX 560</button>
+          <button class="mtab" role="tab" aria-selected="false" data-model="TMAX 530">TMAX 530</button>
+          <button class="mtab" role="tab" aria-selected="false" data-model="TMAX 500">TMAX 500</button>
+        </div></div>
+      </div>
+      <div class="grid reveal" id="gridVedette"></div>
+    </section>
+
+    <section class="sec--tight container">
+      <div class="feature reveal">
+        <div class="feature__in">
+          <div class="feature__media">
+            <div class="spin" aria-hidden="true"><svg class="spin__svg" viewBox="0 0 120 120"><defs><path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text font-size="10.5" font-weight="700" letter-spacing="3.4" fill="currentColor"><textPath href="#ring" startOffset="0">NOUVEAUTÉ · 2026 · NOUVEAUTÉ · 2026 · </textPath></text></svg><span class="spin__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1zM7 11l4-8a2 2 0 0 1 2 2v3h5.5a2 2 0 0 1 2 2.3l-1.3 7a2 2 0 0 1-2 1.7H7"/></svg></span></div>
+            <svg class="art" viewBox="0 0 220 150" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M40 96c-14-6-20-20-14-34 12 2 22 10 26 24"/><path d="M52 86l16-30 10 6-14 32"/><path d="M180 96c14-6 20-20 14-34-12 2-22 10-26 24"/><path d="M168 86l-16-30-10 6 14 32"/><path d="M74 100h72"/></svg>
+          </div>
+          <div class="feature__body">
+            <span class="card__brand">Rizoma</span>
+            <h3>Rétroviseurs homologués Stealth Max Rizoma TMAX 560 (25-26)</h3>
+            <div class="variant"><div class="variant__label">Finition</div><div class="seg" id="seg" role="group" aria-label="Finition"><button aria-pressed="true" data-v="Noir">Noir</button><button aria-pressed="false" data-v="Titane">Titane</button></div></div>
+            <div class="feature__price"><span class="now">589,00 €</span></div>
+            <button class="btn btn--dark btn--block" id="featAdd" data-name="Rétroviseurs Rizoma Stealth Max — Noir" data-price="589">Ajouter au panier</button>
+            <div class="feature__foot"><a class="link-arrow" data-nav="collection" data-cat="accessoires">Afficher tous les accessoires <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec container" id="builder">
+      <div class="builder reveal">
+        <div class="builder__in">
+          <div>
+            <div class="builder__head"><span class="eyebrow">Configurateur · innovant</span><h2>Compose ta prépa TMAX 560</h2><p>Coche les pièces, le total se met à jour en direct. Ajoute le pack complet en un clic — montage possible à l'atelier MaxouTurbo.</p></div>
+            <div class="parts" id="parts">
+              <label class="part on" data-price="899"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Ligne Akrapovič titane<small>Gain de son & de perf</small></span><span class="part__price">899&nbsp;€</span></label>
+              <label class="part on" data-price="179.90"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Variateur Malossi Multivar<small>Accélération franche</small></span><span class="part__price">179,90&nbsp;€</span></label>
+              <label class="part" data-price="64.90"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Kit galets + ressort Polini<small>Réglage optimal</small></span><span class="part__price">64,90&nbsp;€</span></label>
+              <label class="part" data-price="72"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Filtre à air sport DNA<small>Meilleure respiration</small></span><span class="part__price">72,00&nbsp;€</span></label>
+              <label class="part" data-price="149"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Cartographie sur-mesure<small>Réalisée au banc MaxouTurbo</small></span><span class="part__price">149,00&nbsp;€</span></label>
+            </div>
+          </div>
+          <div class="builder__panel">
+            <h3>Ton pack</h3>
+            <div class="bsum"><div class="row"><span id="bCount">2 pièces</span><span id="bRaw">1 078,90 €</span></div><div class="row save"><span>Remise pack −10 %</span><span id="bSave">−107,89 €</span></div><div class="total"><span>Total</span><b id="bTotal">971,01 €</b></div></div>
+            <button class="btn btn--blue btn--block" id="bAdd">Ajouter le pack au panier</button>
+            <p class="builder__note">−10 % automatique sur les packs montés à l'atelier</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec container" id="support">
+      <div class="sechead reveal">
+        <h2>Support téléphone</h2>
+        <div class="right">
+          <div class="mtabs" role="tablist" aria-label="Modèle" data-vitrine="support">
+            <button class="mtab" role="tab" aria-selected="true" data-model="TMAX 560">TMAX 560</button>
+            <button class="mtab" role="tab" aria-selected="false" data-model="TMAX 530">TMAX 530</button>
+            <button class="mtab" role="tab" aria-selected="false" data-model="TMAX 500">TMAX 500</button>
+          </div>
+          <div class="arrows"><button aria-label="Précédent" data-scroll="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button aria-label="Suivant" data-scroll="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        </div>
+      </div>
+      <div class="scroller reveal" id="scroller"></div>
+    </section>
+
+    <section class="sec container">
+      <div class="reviews__head reveal">
+        <div class="reviews__score"><span class="big">4,8</span><div><span class="stars">★★★★★</span><small>1 240 avis vérifiés</small></div></div>
+        <div style="margin-left:auto"><a class="link-arrow" data-nav="collection" data-cat="">Toute la boutique <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="rev-grid reveal">
+        <figure class="review"><span class="stars">★★★★★</span><p>« Commande reçue en 48h, pièces nickel pour mon 560. Le sélecteur de compatibilité m'a évité une erreur. »</p><figcaption class="review__who"><span class="avatar">KD</span><div><b>Kevin D.</b><span>TMAX 560 · 2023</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
+        <figure class="review"><span class="stars">★★★★★</span><p>« J'ai composé mon pack prépa sur le site puis fait monter à l'atelier. Service au top, prix carré. »</p><figcaption class="review__who"><span class="avatar">SL</span><div><b>Sofia L.</b><span>TMAX 530 · 2018</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
+        <figure class="review"><span class="stars">★★★★☆</span><p>« Gros choix de pièces BCD et Rizoma. La navigation par modèle est hyper claire. »</p><figcaption class="review__who"><span class="avatar">MB</span><div><b>Mehdi B.</b><span>TMAX 560 · 2022</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec--tight container">
+      <div class="news reveal">
+        <h2>−10 % sur ta première commande</h2>
+        <p>Nouveautés, promos et bons plans TMAX. On écrit peu, mais bien.</p>
+        <form id="newsForm" novalidate><input type="email" id="newsEmail" placeholder="ton@email.fr" aria-label="Adresse e-mail" required><button class="btn btn--blue" type="submit">Je m'inscris</button></form>
+        <div class="news__ok" id="newsOk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Merci ! Ton code de bienvenue arrive par e-mail.</div>
+        <small>Désinscription en un clic. Aucune revente de données.</small>
+      </div>
+    </section>
+
+    <section class="promise" aria-label="Nos engagements">
+      <div class="container promise__grid">
+        <div class="promise__it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg><div><b>Livraison gratuite</b><span>Dès 50 € d'achat, en France.</span></div></div>
+        <div class="promise__it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><div><b>Service client</b><span>Réponse par mail sous 72h ouvrés.</span></div></div>
+        <div class="promise__it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Paiement sécurisé</b><span>Infos de paiement chiffrées.</span></div></div>
+        <div class="promise__it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6z"/><path d="M8 11h8M8 14h8"/></svg><div><b>Emballage protégé</b><span>Filmé de la boîte au transporteur.</span></div></div>
+      </div>
+    </section>
+  </div><!-- /homeView -->
+
+  <!-- ========== COLLECTION VIEW ========== -->
+  <div id="collectionView" hidden>
+    <div class="container coll-top">
+      <nav class="crumb"><a data-nav="home">Accueil</a> <span>/</span> <span id="crumbMid">Boutique</span></nav>
+      <div class="coll-head">
+        <div><h1 id="collTitle">Toutes les pièces</h1></div>
+        <div class="coll-tools">
+          <span class="coll-count" id="collCount">0 produit</span>
+          <button class="btn btn--light btn--sm filt-toggle" id="filtToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filtrer</button>
+          <div class="select"><select id="collSort" aria-label="Trier"><option value="pop">Populaires</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="new">Nouveautés</option></select></div>
+        </div>
+      </div>
+    </div>
+    <div class="container coll">
+      <aside class="filters" id="filters">
+        <div class="filters__head"><span>Filtres</span><button id="filtClose" aria-label="Fermer">✕</button></div>
+        <div class="fgroup"><h4>Catégorie</h4><div class="fcat" id="fCatList"></div></div>
+        <div class="fgroup"><h4>Modèle</h4><div class="fchips" id="fModels"><button class="fchip" data-model="TMAX 560" aria-pressed="false">TMAX 560</button><button class="fchip" data-model="TMAX 530" aria-pressed="false">TMAX 530</button><button class="fchip" data-model="TMAX 500" aria-pressed="false">TMAX 500</button></div></div>
+        <div class="fgroup"><h4>Marque</h4><div class="fbrands" id="fBrandsList"></div></div>
+        <div class="fgroup"><h4>Prix</h4><div class="fchips" id="fPrice"><button class="fchip" data-price="all" aria-pressed="true">Tous</button><button class="fchip" data-price="0-50" aria-pressed="false">&lt; 50 €</button><button class="fchip" data-price="50-150" aria-pressed="false">50–150 €</button><button class="fchip" data-price="150-500" aria-pressed="false">150–500 €</button><button class="fchip" data-price="500-99999" aria-pressed="false">500 € +</button></div></div>
+        <button class="freset" id="fReset">Réinitialiser les filtres</button>
+      </aside>
+      <div class="coll__main">
+        <div class="grid" id="collGrid"></div>
+        <div class="coll-empty" id="collEmpty" hidden>Aucun produit ne correspond à ces filtres.<br><button id="collClear">Réinitialiser</button></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <button class="brand" data-nav="home"><span class="brand__row"><span class="brand__t">TMAX</span><span class="brand__s">Shop</span></span><span class="brand__by">by MaxouTurbo</span></button>
+      <p>La boutique en ligne des pièces & accessoires TMAX, par l'atelier MaxouTurbo — Auriol (13), près de Marseille.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4c.5 3 2.5 4.5 5 4.7V12c-2 0-3.7-.6-5-1.6V15a5.5 5.5 0 1 1-5.5-5.5c.4 0 .7 0 1 .1v3.1a2.4 2.4 0 1 0 1.5 2.3V4z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1z"/></svg></a>
+      </div>
+    </div>
+    <div class="fcol"><h4>Boutique</h4><a data-nav="collection" data-model="TMAX 560">TMAX 560</a><a data-nav="collection" data-model="TMAX 530">TMAX 530</a><a data-nav="collection" data-model="TMAX 500">TMAX 500</a><a data-nav="collection" data-cat="">Toutes les pièces</a></div>
+    <div class="fcol"><h4>Catégories</h4><a data-nav="collection" data-cat="echappement">Échappement</a><a data-nav="collection" data-cat="freinage">Freinage</a><a data-nav="collection" data-cat="transmission">Variateur</a><a data-nav="collection" data-cat="esthetique">Esthétique</a><a data-nav="collection" data-cat="support">Support téléphone</a></div>
+    <div class="fcol"><h4>Aide</h4><a href="#">Suivi de commande</a><a href="#">Guide compatibilité</a><a href="#">Livraison & retours</a><a href="#">L'atelier MaxouTurbo</a><a href="#">Contact</a></div>
+  </div>
+  <div class="container footer__locale">
+    <div class="select"><select aria-label="Langue"><option>Français</option><option>English</option></select></div>
+    <div class="select"><select aria-label="Devise"><option>France (EUR €)</option><option>Suisse (CHF)</option><option>Belgique (EUR €)</option></select></div>
+  </div>
+  <div class="container footer__bottom">
+    <div class="footer__legal"><span>© 2026 TMAX Shop by MaxouTurbo</span><a href="#">CGV</a><a href="#">Mentions légales</a><span>Maquette — contenu & prix non contractuels</span></div>
+    <div class="pays"><span class="pay">VISA</span><span class="pay">MC</span><span class="pay">PAYPAL</span><span class="pay">4X</span><span class="pay">APPLE&nbsp;PAY</span></div>
+  </div>
+</footer>
+
+<button class="chat" id="chat" aria-label="Chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg> Chat</button>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer__head"><h3>Panier · <span id="dCount">0</span></h3><button class="drawer__close" id="dClose" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="ship"><div class="ship__txt" id="shipTxt">Plus que <b>50,00 €</b> pour la livraison offerte 🚚</div><div class="ship__bar"><div class="ship__fill" id="shipFill"></div></div></div>
+  <div class="drawer__items" id="dItems"><p class="drawer__empty">Ton panier est vide.</p></div>
+  <div class="drawer__foot"><div class="drawer__sub"><span>Sous-total</span><span class="amt" id="dSub">0,00 €</span></div><button class="btn btn--dark btn--block">Passer commande</button><small>Taxes incluses · livraison calculée à l'étape suivante.</small></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Ajouté au panier</span></div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var euro = function (n) { return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €"; };
+
+  /* ---------- data ---------- */
+  var CATS = [
+    { key: "echappement", label: "Échappement" },
+    { key: "freinage", label: "Freinage" },
+    { key: "transmission", label: "Variateur & transmission" },
+    { key: "esthetique", label: "Esthétique & carbone" },
+    { key: "entretien", label: "Entretien" },
+    { key: "support", label: "Support téléphone" },
+    { key: "accessoires", label: "Accessoires" }
+  ];
+  var catLabel = {}; CATS.forEach(function (c) { catLabel[c.key] = c.label; });
+  var ART = {
+    echappement: '<rect x="30" y="50" width="56" height="22" rx="11"/><path d="M86 55l12 3v6l-12 3M30 61H16"/><path d="M42 50l4-8M58 50l4-8"/>',
+    freinage: '<circle cx="60" cy="60" r="28"/><circle cx="60" cy="60" r="10"/><circle cx="60" cy="36" r="2.2"/><circle cx="80" cy="50" r="2.2"/><circle cx="80" cy="70" r="2.2"/><circle cx="60" cy="84" r="2.2"/><circle cx="40" cy="70" r="2.2"/><circle cx="40" cy="50" r="2.2"/>',
+    transmission: '<circle cx="46" cy="60" r="22"/><circle cx="82" cy="62" r="14"/><path d="M46 38v44M82 48v28"/>',
+    esthetique: '<path d="M34 84c2-38 20-54 52-56-3 30-18 50-52 56z"/><path d="M58 64l14-6"/>',
+    entretien: '<path d="M50 34h20v10H50zM46 44h28l-4 40a5 5 0 0 1-5 4H55a5 5 0 0 1-5-4z"/><path d="M52 58h16"/>',
+    support: '<rect x="46" y="32" width="28" height="50" rx="6"/><circle cx="60" cy="58" r="7"/><path d="M40 90h40"/>',
+    accessoires: '<circle cx="60" cy="60" r="24"/><circle cx="60" cy="60" r="10"/><path d="M60 30v8M60 82v8M30 60h8M82 60h8"/>'
+  };
+  function art(cat) { return '<svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">' + (ART[cat] || ART.accessoires) + "</svg>"; }
+  var M = ["TMAX 560", "TMAX 530", "TMAX 500"], A = M, B = M.concat("TMAX 530"), C = ["TMAX 560", "TMAX 530"];
+  var P = function (id, name, brand, cat, models, price, old, badge, isNew) { return { id: id, name: name, brand: brand, cat: cat, models: models, price: price, old: old || 0, badge: badge || "", isNew: !!isNew }; };
+  var CATALOG = [
+    P(1, "Ligne d'échappement Akrapovič Racing", "Akrapovič", "echappement", C, 1350, 0, ""),
+    P(2, "Silencieux SC-Project SC1-R carbone", "SC-Project", "echappement", C, 640, 0, "Nouveau", true),
+    P(3, "Ligne complète Malossi RX", "Malossi", "echappement", ["TMAX 560"], 720, 799, "-10%"),
+    P(4, "Embout d'échappement alu", "TMAX Shop", "echappement", ["TMAX 530", "TMAX 500"], 79, 0, ""),
+    P(5, "Disques Brembo Serie Oro Ø267", "Brembo", "freinage", C, 214, 0, ""),
+    P(6, "Plaquettes de frein Brembo SA frittées", "Brembo", "freinage", A, 34.90, 43.90, "-20%"),
+    P(7, "Durites de frein aviation Frentubo", "Frentubo", "freinage", C, 89, 0, ""),
+    P(8, "Caches étrier de frein BCD", "BCD", "freinage", ["TMAX 560"], 114, 120, ""),
+    P(9, "Variateur Malossi Multivar 2000 MHR", "Malossi", "transmission", C, 179.90, 0, ""),
+    P(10, "Kit galets + ressort de poussée Polini", "Polini", "transmission", C, 64.90, 0, ""),
+    P(11, "Courroie de transmission Malossi Kevlar", "Malossi", "transmission", A, 59, 0, ""),
+    P(12, "Embrayage renforcé Malossi Delta", "Malossi", "transmission", C, 215, 0, ""),
+    P(13, "Face avant Puig TMAX", "Puig", "esthetique", ["TMAX 560"], 116.10, 129, "Épuisé"),
+    P(14, "Bulle sport BCD RT V2", "BCD", "esthetique", ["TMAX 560"], 114, 120, "-5%"),
+    P(15, "Sabot moteur carbone brillant", "TMAX Shop", "esthetique", C, 149, 0, "Nouveau", true),
+    P(16, "Prise d'air BCD", "BCD", "esthetique", ["TMAX 560"], 118.75, 125, "Épuisé"),
+    P(17, "Pack vidange pour TMAX", "TMAX Shop", "entretien", A, 47.90, 0, ""),
+    P(18, "Pack révision 10 000 km", "TMAX Shop", "entretien", A, 99, 0, ""),
+    P(19, "Pack révision 20 000 km", "TMAX Shop", "entretien", A, 315, 0, ""),
+    P(20, "Filtre à air sport DNA", "DNA", "entretien", A, 72, 0, ""),
+    P(21, "Support téléphone tête haute BCD", "BCD", "support", ["TMAX 560"], 123.50, 130, ""),
+    P(22, "Support téléphone BCD Quad Lock", "BCD", "support", ["TMAX 560"], 120.65, 127, "Épuisé"),
+    P(23, "Chargeur à induction Quad Lock", "Quad Lock", "support", A, 79.90, 0, "", true),
+    P(24, "Coque de téléphone Quad Lock", "Quad Lock", "support", A, 24.50, 29.90, ""),
+    P(25, "Kit logo LED clignotants Yamaha", "TMAX Shop", "accessoires", A, 69, 0, ""),
+    P(26, "Rampe LED clignotants séquentiels", "TMAX Shop", "accessoires", A, 39.90, 0, ""),
+    P(27, "Rétroviseurs Rizoma Stealth Max", "Rizoma", "accessoires", ["TMAX 560"], 589, 0, "Nouveau", true),
+    P(28, "Antivol U SRA Auvray", "Auvray", "accessoires", A, 79, 0, "")
+  ];
+  var BRANDS = []; CATALOG.forEach(function (p) { if (BRANDS.indexOf(p.brand) < 0) BRANDS.push(p.brand); }); BRANDS.sort();
+  var MEGA_BRANDS = ["Akrapovič", "Malossi", "Polini", "Brembo", "Puig", "Rizoma", "SC-Project", "BCD", "Quad Lock", "Motul"];
+
+  function cardHTML(p) {
+    var badge = p.badge ? '<span class="card__badge' + (p.badge.indexOf("%") > -1 ? " card__badge--promo" : (p.badge === "Nouveau" ? " card__badge--new" : "")) + '">' + p.badge + "</span>" : "";
+    var price = '<span class="now">' + euro(p.price) + "</span>" + (p.old ? '<span class="was">' + euro(p.old) + "</span>" : "");
+    return '<article class="card"><div class="card__media">' + badge +
+      '<button class="card__fav" aria-label="Favori"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.6-9-9a4.3 4.3 0 0 1 9-2 4.3 4.3 0 0 1 9 2c-2 4.4-9 9-9 9z"/></svg></button>' +
+      '<button class="card__add" aria-label="Ajouter" data-name="' + p.name + '" data-price="' + p.price + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>' +
+      art(p.cat) + '</div><div class="card__info"><span class="card__brand">' + p.brand + '</span><h3 class="card__title">' + p.name + '</h3><div class="card__price">' + price + "</div></div></article>";
+  }
+
+  /* ---------- reveal / header ---------- */
+  document.body.classList.add("rv");
+  var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }) : null;
+  function observe(root) { $$(".reveal", root).forEach(function (el) { if (io) io.observe(el); else el.classList.add("in"); }); }
+  observe(document);
+  var header = $("#header");
+  window.addEventListener("scroll", function () { header.classList.toggle("scrolled", window.scrollY > 6); }, { passive: true });
+
+  /* ---------- toast ---------- */
+  var toast = $("#toast"), toastMsg = $("#toastMsg"), tt;
+  function showToast(m) { toastMsg.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("show"); }, 2200); }
+
+  /* ---------- cart ---------- */
+  var cart = [], THRESHOLD = 50;
+  var cc = $("#cartCount"), dItems = $("#dItems"), dCount = $("#dCount"), dSub = $("#dSub"), overlay = $("#overlay"), drawer = $("#drawer");
+  function subtotal() { return cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0); }
+  function totalQty() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
+  function openDrawer() { overlay.removeAttribute("hidden"); requestAnimationFrame(function () { overlay.classList.add("show"); }); drawer.classList.add("show"); drawer.setAttribute("aria-hidden", "false"); document.body.classList.add("lock"); }
+  function closeDrawer() { overlay.classList.remove("show"); drawer.classList.remove("show"); drawer.setAttribute("aria-hidden", "true"); document.body.classList.remove("lock"); setTimeout(function () { overlay.setAttribute("hidden", ""); }, 260); }
+  function miniArt() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l3 3v5h-3M4 8v8h3M7 8V6h7v2"/><circle cx="9" cy="17" r="1.6"/><circle cx="16" cy="17" r="1.6"/></svg>'; }
+  function renderCart() {
+    var q = totalQty();
+    cc.textContent = String(q); cc.classList.toggle("show", q > 0);
+    cc.classList.remove("bump"); void cc.offsetWidth; if (q > 0) cc.classList.add("bump");
+    dCount.textContent = String(q);
+    dItems.innerHTML = cart.length ? cart.map(function (i, idx) {
+      return '<div class="ditem"><div class="ditem__img">' + miniArt() + '</div><div class="ditem__main"><div class="ditem__name">' + i.name + '</div><div class="ditem__price">' + euro(i.price) + '</div><div class="qty"><button data-dec="' + idx + '" aria-label="Moins">−</button><span>' + i.qty + '</span><button data-inc="' + idx + '" aria-label="Plus">+</button></div></div><button class="ditem__rm" data-rm="' + idx + '">Retirer</button></div>';
+    }).join("") : '<p class="drawer__empty">Ton panier est vide.</p>';
+    dSub.textContent = euro(subtotal());
+    var sub = subtotal();
+    $("#shipFill").style.width = Math.min(sub / THRESHOLD * 100, 100) + "%";
+    $("#shipTxt").innerHTML = sub >= THRESHOLD ? "Livraison offerte débloquée ✓" : "Plus que <b>" + euro(THRESHOLD - sub) + "</b> pour la livraison offerte 🚚";
+  }
+  function addToCart(name, price) {
+    var ex = cart.filter(function (i) { return i.name === name; })[0];
+    if (ex) ex.qty++; else cart.push({ name: name, price: price, qty: 1 });
+    renderCart(); openDrawer();
+  }
+  dItems.addEventListener("click", function (e) {
+    var t = e.target, inc = t.getAttribute("data-inc"), dec = t.getAttribute("data-dec"), rm = t.getAttribute("data-rm");
+    if (inc !== null) { cart[+inc].qty++; renderCart(); }
+    else if (dec !== null) { cart[+dec].qty--; if (cart[+dec].qty <= 0) cart.splice(+dec, 1); renderCart(); }
+    else if (rm !== null) { cart.splice(+rm, 1); renderCart(); }
+  });
+  $("#cartBtn").addEventListener("click", openDrawer);
+  $("#dClose").addEventListener("click", closeDrawer);
+  overlay.addEventListener("click", closeDrawer);
+
+  /* delegated card add + favourite (home + collection) */
+  document.addEventListener("click", function (e) {
+    var add = e.target.closest ? e.target.closest(".card__add") : null;
+    if (add) { e.preventDefault(); addToCart(add.getAttribute("data-name"), parseFloat(add.getAttribute("data-price")) || 0); return; }
+    var fav = e.target.closest ? e.target.closest(".card__fav") : null;
+    if (fav) { e.preventDefault(); fav.classList.toggle("on"); var s = fav.querySelector("svg"); if (s) s.setAttribute("fill", fav.classList.contains("on") ? "currentColor" : "none"); }
+  });
+
+  /* ---------- vitrines (home grids) ---------- */
+  function fill(el, list) { el.innerHTML = list.map(cardHTML).join(""); }
+  function byModel(cat, model, n) { return CATALOG.filter(function (p) { return p.cat === cat && p.models.indexOf(model) > -1; }).slice(0, n); }
+  var vitrineModel = { vedette: "TMAX 560", support: "TMAX 560" };
+  function renderVitrine(name) {
+    if (name === "vedette") {
+      var m = vitrineModel.vedette, list = CATALOG.filter(function (p) { return p.models.indexOf(m) > -1 && (p.cat === "esthetique" || p.cat === "freinage"); }).slice(0, 4);
+      if (list.length < 4) list = CATALOG.filter(function (p) { return p.models.indexOf(m) > -1; }).slice(0, 4);
+      fill($("#gridVedette"), list);
+    } else {
+      var mm = vitrineModel.support, l2 = CATALOG.filter(function (p) { return p.cat === "support" && p.models.indexOf(mm) > -1; });
+      if (l2.length < 4) l2 = CATALOG.filter(function (p) { return p.cat === "support"; });
+      fill($("#scroller"), l2);
+    }
+  }
+  renderVitrine("vedette"); renderVitrine("support");
+  $$('.mtabs[data-vitrine]').forEach(function (tabs) {
+    var name = tabs.getAttribute("data-vitrine");
+    $$(".mtab", tabs).forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        $$(".mtab", tabs).forEach(function (t) { t.setAttribute("aria-selected", "false"); });
+        tab.setAttribute("aria-selected", "true");
+        vitrineModel[name] = tab.getAttribute("data-model");
+        renderVitrine(name);
+      });
+    });
+  });
+
+  /* ---------- brands (home + mega) ---------- */
+  $("#homeBrands").innerHTML = MEGA_BRANDS.map(function (b) { return '<div class="brandcard" data-brand="' + b + '">' + b.toUpperCase() + "</div>"; }).join("");
+  $("#megaBrands").innerHTML = MEGA_BRANDS.map(function (b) { return '<button class="mm__brand" data-brand="' + b + '">' + b.toUpperCase() + "</button>"; }).join("");
+
+  /* ---------- mega menu ---------- */
+  var mega = $("#mega"), megaBack = document.createElement("div"); megaBack.className = "mega-back"; document.body.appendChild(megaBack);
+  function fillMegaCats() {
+    $$(".mm__cats[data-model]").forEach(function (box) {
+      var model = box.getAttribute("data-model");
+      box.innerHTML = '<span class="mm__h">' + model + " — catégories</span>" + CATS.map(function (c) {
+        return '<button class="mm__cat" data-model="' + model + '" data-cat="' + c.key + '"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">' + ART[c.key] + "</svg>" + c.label + "</button>";
+      }).join("") + '<button class="mm__cat all" data-model="' + model + '" data-cat="">Voir tout le ' + model + " →</button>";
+    });
+  }
+  fillMegaCats();
+  var openMega = null;
+  function showMega(name, toggle) {
+    $$(".mega__panel", mega).forEach(function (p) { p.classList.toggle("show", p.getAttribute("data-panel") === name); });
+    mega.classList.add("open"); megaBack.classList.add("show");
+    $$(".nav__toggle").forEach(function (t) { t.setAttribute("aria-expanded", String(t === toggle)); });
+    openMega = name;
+  }
+  function hideMega() { mega.classList.remove("open"); megaBack.classList.remove("show"); $$(".nav__toggle").forEach(function (t) { t.setAttribute("aria-expanded", "false"); }); openMega = null; }
+  $$(".nav__toggle").forEach(function (t) {
+    t.addEventListener("click", function (e) { e.stopPropagation(); var name = t.getAttribute("data-mega"); if (openMega === name) hideMega(); else showMega(name, t); });
+  });
+  megaBack.addEventListener("click", hideMega);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { hideMega(); closeDrawer(); closeMobile(); closeFilters(); } });
+
+  /* ---------- navigation (views) ---------- */
+  var homeView = $("#homeView"), collView = $("#collectionView"), main = $("#main");
+  function showHome() { collView.setAttribute("hidden", ""); homeView.removeAttribute("hidden"); window.scrollTo({ top: 0 }); }
+  function goExplore() { showHome(); setTimeout(function () { var el = $("#explore"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 40); }
+
+  /* ---------- collection ---------- */
+  var state = { cat: "", models: [], brands: [], price: "all", sort: "pop" };
+  function buildFilterUI() {
+    $("#fCatList").innerHTML = '<button data-cat="" aria-current="true">Toutes<span>' + CATALOG.length + "</span></button>" + CATS.map(function (c) {
+      var n = CATALOG.filter(function (p) { return p.cat === c.key; }).length;
+      return '<button data-cat="' + c.key + '" aria-current="false">' + c.label + "<span>" + n + "</span></button>";
+    }).join("");
+    $("#fBrandsList").innerHTML = BRANDS.map(function (b) { return '<label><input type="checkbox" value="' + b + '"> ' + b + "</label>"; }).join("");
+  }
+  buildFilterUI();
+  function inPrice(p) { if (state.price === "all") return true; var r = state.price.split("-"); return p.price >= +r[0] && p.price <= +r[1]; }
+  function filtered() {
+    return CATALOG.filter(function (p) {
+      if (state.cat && p.cat !== state.cat) return false;
+      if (state.models.length && !state.models.some(function (m) { return p.models.indexOf(m) > -1; })) return false;
+      if (state.brands.length && state.brands.indexOf(p.brand) < 0) return false;
+      if (!inPrice(p)) return false;
+      return true;
+    });
+  }
+  function sortList(list) {
+    var l = list.slice();
+    if (state.sort === "price-asc") l.sort(function (a, b) { return a.price - b.price; });
+    else if (state.sort === "price-desc") l.sort(function (a, b) { return b.price - a.price; });
+    else if (state.sort === "new") l.sort(function (a, b) { return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0); });
+    return l;
+  }
+  function syncFilterUI() {
+    $$("#fCatList button").forEach(function (b) { b.setAttribute("aria-current", String(b.getAttribute("data-cat") === state.cat)); });
+    $$("#fModels .fchip").forEach(function (b) { b.setAttribute("aria-pressed", String(state.models.indexOf(b.getAttribute("data-model")) > -1)); });
+    $$("#fPrice .fchip").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-price") === state.price)); });
+    $$("#fBrandsList input").forEach(function (c) { c.checked = state.brands.indexOf(c.value) > -1; });
+  }
+  function renderColl() {
+    var list = sortList(filtered());
+    $("#collGrid").innerHTML = list.map(cardHTML).join("");
+    $("#collEmpty").hidden = list.length > 0;
+    $("#collCount").textContent = list.length + (list.length > 1 ? " produits" : " produit");
+    var title = state.cat ? catLabel[state.cat] : (state.models.length === 1 ? state.models[0] : "Toutes les pièces");
+    $("#collTitle").textContent = title;
+    $("#crumbMid").innerHTML = (state.models.length === 1 ? state.models[0] + " <span>/</span> " : "Boutique <span>/</span> ") + "<b>" + (state.cat ? catLabel[state.cat] : "Tout") + "</b>";
+    syncFilterUI();
+  }
+  function openColl(opt) {
+    opt = opt || {};
+    state.cat = opt.cat != null ? opt.cat : "";
+    state.models = opt.model ? [opt.model] : [];
+    state.brands = opt.brand ? [opt.brand] : [];
+    state.price = "all"; state.sort = "pop";
+    $("#collSort").value = "pop";
+    hideMega(); closeMobile();
+    homeView.setAttribute("hidden", ""); collView.removeAttribute("hidden");
+    window.scrollTo({ top: 0 });
+    renderColl();
+  }
+  /* filter interactions */
+  $("#fCatList").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; state.cat = b.getAttribute("data-cat"); renderColl(); });
+  $("#fModels").addEventListener("click", function (e) { var b = e.target.closest(".fchip"); if (!b) return; var m = b.getAttribute("data-model"), i = state.models.indexOf(m); if (i > -1) state.models.splice(i, 1); else state.models.push(m); renderColl(); });
+  $("#fPrice").addEventListener("click", function (e) { var b = e.target.closest(".fchip"); if (!b) return; state.price = b.getAttribute("data-price"); renderColl(); });
+  $("#fBrandsList").addEventListener("change", function (e) { var c = e.target; if (c.checked) state.brands.push(c.value); else state.brands = state.brands.filter(function (x) { return x !== c.value; }); renderColl(); });
+  $("#collSort").addEventListener("change", function () { state.sort = this.value; renderColl(); });
+  function resetFilters() { state = { cat: "", models: [], brands: [], price: "all", sort: "pop" }; $("#collSort").value = "pop"; renderColl(); }
+  $("#fReset").addEventListener("click", resetFilters);
+  $("#collClear").addEventListener("click", resetFilters);
+  /* mobile filters panel */
+  var filters = $("#filters");
+  function openFilters() { filters.classList.add("open"); document.body.classList.add("lock"); }
+  function closeFilters() { filters.classList.remove("open"); document.body.classList.remove("lock"); }
+  $("#filtToggle").addEventListener("click", openFilters);
+  $("#filtClose").addEventListener("click", closeFilters);
+
+  /* ---------- global nav delegation ---------- */
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest ? e.target.closest("[data-nav],[data-mega] , .mm__cat,[data-brand],[data-cat][data-model],[data-open-all]") : null;
+    // handle explicit nav targets
+    var nav = e.target.closest ? e.target.closest("[data-nav]") : null;
+    if (nav) {
+      var kind = nav.getAttribute("data-nav");
+      if (kind === "home") { e.preventDefault(); hideMega(); showHome(); return; }
+      if (kind === "explore") { e.preventDefault(); hideMega(); goExplore(); return; }
+      if (kind === "collection") { e.preventDefault(); openColl({ cat: nav.getAttribute("data-cat") || "", model: nav.getAttribute("data-model") || "" }); return; }
+    }
+    var cat = e.target.closest ? e.target.closest(".mm__cat,[data-open-all]") : null;
+    if (cat && cat.classList.contains("mm__cat")) { e.preventDefault(); openColl({ cat: cat.getAttribute("data-cat") || "", model: cat.getAttribute("data-model") || "" }); return; }
+    var brand = e.target.closest ? e.target.closest("[data-brand]") : null;
+    if (brand) { e.preventDefault(); openColl({ brand: brand.getAttribute("data-brand") }); return; }
+    var openAll = e.target.closest ? e.target.closest("[data-open-all]") : null;
+    if (openAll) { e.preventDefault(); openColl({}); return; }
+    // mega promo buttons carry data-model+data-cat
+    var promo = e.target.closest ? e.target.closest(".mega__promo [data-model]") : null;
+    if (promo) { e.preventDefault(); openColl({ model: promo.getAttribute("data-model"), cat: promo.getAttribute("data-cat") || "" }); return; }
+  });
+
+  /* ---------- mobile menu ---------- */
+  var mobile = $("#mobile");
+  function openMobile() { mobile.classList.add("show"); document.body.classList.add("lock"); }
+  function closeMobile() { mobile.classList.remove("show"); document.body.classList.remove("lock"); }
+  $("#burger").addEventListener("click", openMobile);
+  $("#mClose").addEventListener("click", closeMobile);
+  (function buildMobile() {
+    var html = "";
+    M.forEach(function (model) {
+      html += '<div class="macc"><button class="macc__t" data-acc>' + model + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="macc__p">' +
+        CATS.map(function (c) { return '<a data-nav="collection" data-model="' + model + '" data-cat="' + c.key + '">' + c.label + "</a>"; }).join("") +
+        '<a data-nav="collection" data-model="' + model + '" data-cat="">Voir tout le ' + model + "</a></div></div>";
+    });
+    html += '<div class="macc"><button class="macc__t" data-acc>Les marques <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="macc__p">' +
+      MEGA_BRANDS.map(function (b) { return '<a data-brand="' + b + '">' + b + "</a>"; }).join("") + "</div></div>";
+    html += '<a class="macc__solo" data-nav="collection" data-cat="">Toutes les pièces</a>';
+    html += '<a class="macc__solo" data-nav="explore">Explore ton TMAX</a>';
+    $("#mBody").innerHTML = html;
+    $$("#mBody [data-acc]").forEach(function (b) { b.addEventListener("click", function () { b.parentNode.classList.toggle("open"); }); });
+  })();
+
+  /* ---------- featured variant + builder + hotspots + finder + misc ---------- */
+  var seg = $("#seg");
+  if (seg) $$("button", seg).forEach(function (b) { b.addEventListener("click", function () { $$("button", seg).forEach(function (x) { x.setAttribute("aria-pressed", "false"); }); b.setAttribute("aria-pressed", "true"); $("#featAdd").setAttribute("data-name", "Rétroviseurs Rizoma Stealth Max — " + b.getAttribute("data-v")); }); });
+  $("#featAdd").addEventListener("click", function () { var f = $("#featAdd"); addToCart(f.getAttribute("data-name"), parseFloat(f.getAttribute("data-price")) || 0); });
+
+  var parts = $("#parts");
+  function renderBuilder() {
+    var sel = $$(".part.on", parts), raw = 0; sel.forEach(function (p) { raw += parseFloat(p.getAttribute("data-price")); });
+    var save = raw * 0.10;
+    $("#bCount").textContent = sel.length + (sel.length > 1 ? " pièces" : " pièce");
+    $("#bRaw").textContent = euro(raw); $("#bSave").textContent = "−" + euro(save); $("#bTotal").textContent = euro(raw - save);
+  }
+  $$(".part", parts).forEach(function (p) { p.addEventListener("click", function () { p.classList.toggle("on"); renderBuilder(); }); });
+  renderBuilder();
+  $("#bAdd").addEventListener("click", function () {
+    var sel = $$(".part.on", parts);
+    if (!sel.length) { showToast("Sélectionne au moins une pièce"); return; }
+    sel.forEach(function (p) { addToCart(p.querySelector(".part__name").childNodes[0].textContent.trim(), parseFloat(p.getAttribute("data-price")) * 0.9); });
+    showToast("Pack ajouté · −10 % appliqué");
+  });
+
+  $$(".hs").forEach(function (h) {
+    h.addEventListener("click", function (e) { e.stopPropagation(); var was = h.classList.contains("open"); $$(".hs").forEach(function (x) { x.classList.remove("open"); }); if (!was) h.classList.add("open"); });
+    var go = h.querySelector(".go");
+    if (go) go.addEventListener("click", function (e) { e.stopPropagation(); openColl({ cat: h.getAttribute("data-cat") }); });
+  });
+  document.addEventListener("click", function () { $$(".hs").forEach(function (x) { x.classList.remove("open"); }); });
+
+  var scroller = $("#scroller");
+  $$('[data-scroll]').forEach(function (b) { b.addEventListener("click", function () { if (!scroller) return; var c = scroller.querySelector(".card"); scroller.scrollBy({ left: (c ? c.offsetWidth + 20 : 260) * parseInt(b.getAttribute("data-scroll"), 10), behavior: "smooth" }); }); });
+
+  var finder = $("#finder"), fMod = $("#fMod"), fYear = $("#fYear"), fCat = $("#fCat"), note = $("#finderNote"), val = $("#finderVal"), reset = $("#finderReset");
+  finder.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!fMod.value) { fMod.focus(); return; }
+    val.textContent = fMod.value + (fYear.value ? " · " + fYear.value : ""); note.classList.add("show");
+    openColl({ model: fMod.value, cat: fCat.value || "" });
+  });
+  reset.addEventListener("click", function () { fMod.selectedIndex = 0; fYear.selectedIndex = 0; note.classList.remove("show"); });
+
+  var nf = $("#newsForm"), ne = $("#newsEmail"), ok = $("#newsOk");
+  nf.addEventListener("submit", function (e) { e.preventDefault(); if (!ne.value || ne.value.indexOf("@") === -1) { ne.focus(); return; } nf.setAttribute("hidden", ""); ok.classList.add("show"); });
+  $("#chat").addEventListener("click", function () { showToast("Chat : bientôt disponible"); });
+})();
+</script>
