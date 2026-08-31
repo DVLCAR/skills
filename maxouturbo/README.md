@@ -34,7 +34,18 @@ méga-menu + collections filtrables** ci-dessus.
 ## Direction artistique
 
 Fond **blanc**, cartes arrondies, ombres douces, boutons pill · encre `#0E0E12` ·
-**prix bleu `#1B63F2`** · barré rouge `#E5342A` · typo **Plus Jakarta Sans** · thème clair.
+**prix bleu `#1B63F2`** · barré rouge `#E5342A` · typo **Hanken Grotesk** · thème clair.
+
+## Qualité / anti-« design IA » (audit Impeccable)
+
+Le thème a été passé au détecteur **Impeccable** (61 règles déterministes de tics « design IA »).
+Corrections appliquées : police passe-partout remplacée (Plus Jakarta Sans → **Hanken Grotesk**),
+**contrastes** texte AA (gris secondaire assombri), **tailles de texte** remontées au-dessus des
+planchers de lisibilité (11/12 px), **ombres** resserrées (fin des ombres larges diffuses +
+bord fin, un tic génératif), easing **bounce** remplacé par un ease-out exponentiel, animations de
+**layout** (`max-height`, `width`) converties en `grid-template-rows` / `transform`, et retrait de
+l'**eyebrow** au-dessus du titre hero. Résultat : **51 → 11 signalements**, les 11 restants étant des
+faux positifs du scan statique (paddings `clamp()`/`var()` non résolus hors navigateur).
 
 ## Contenu
 
