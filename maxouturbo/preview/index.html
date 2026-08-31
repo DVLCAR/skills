@@ -1,6 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;125,600;125,700;125,800&display=swap">
 <title>TMAX Shop</title>
 <style>
   /* ============================================================
@@ -15,7 +15,8 @@
     --line:#EAEAEE;--line-2:#DCDCE2;
     --blue:#1B63F2;--blue-ink:#1550D0;--blue-soft:#EAF1FE;
     --red:#E5342A;--black:#0E0E12;--ok:#17924E;--amber:#F5A623;
-    --font:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-display:"Archivo","Arial Narrow",system-ui,sans-serif;
     --maxw:1240px;--pad:clamp(1rem,4vw,2.25rem);--section-y:clamp(3rem,6.5vw,5.5rem);
     --r-xl:28px;--r-lg:20px;--r:16px;--r-sm:12px;
     --shadow-card:0 4px 14px -6px rgba(16,16,22,.14);--shadow-soft:0 1px 2px rgba(16,16,22,.07);
@@ -26,6 +27,7 @@
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
   body.lock{overflow:hidden}
   h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.05;text-wrap:balance}
+  h1,h2{font-family:var(--font-display);font-stretch:125%;font-weight:800;letter-spacing:-.025em;line-height:1.02;text-transform:uppercase}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit}
   img,svg{display:block;max-width:100%}
@@ -61,7 +63,7 @@
   .header.scrolled{box-shadow:0 10px 30px -24px rgba(16,16,22,.5)}
   .header__in{display:flex;align-items:center;gap:1.25rem;height:74px}
   .brand{display:inline-flex;flex-direction:column;line-height:1;cursor:pointer;background:none;border:0;padding:0;text-align:left}
-  .brand__row{font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
+  .brand__row{font-family:var(--font-display);font-stretch:125%;font-size:1.6rem;font-weight:800;letter-spacing:.01em;text-transform:uppercase}
   .brand__t{color:var(--ink)}.brand__s{color:var(--blue)}
   .brand__by{font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--ink-2);margin-top:3px;text-transform:uppercase}
   .nav{display:flex;align-items:center;gap:.25rem;margin:0 auto}
@@ -124,7 +126,7 @@
   /* Hero + finder */
   .hero{padding-block:clamp(2.25rem,5vw,3.75rem) clamp(1.25rem,3vw,2rem);text-align:center}
   .hero__in{display:flex;flex-direction:column;align-items:center}
-  .hero h1{font-size:clamp(2.1rem,5.4vw,3.7rem);margin:.9rem 0 0;max-width:16ch}
+  .hero h1{font-size:clamp(2.4rem,6.2vw,4.4rem);margin:.9rem 0 0;max-width:15ch}
   .hero h1 .hl{color:var(--blue)}
   .hero__sub{color:var(--ink-2);font-size:clamp(1rem,1.4vw,1.15rem);max-width:52ch;margin:1.1rem 0 0}
   .finder{width:100%;max-width:660px;margin:2rem auto 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow-card);padding:clamp(1.25rem,3vw,1.75rem);text-align:left}

@@ -34,12 +34,15 @@ méga-menu + collections filtrables** ci-dessus.
 ## Direction artistique
 
 Fond **blanc**, cartes arrondies, ombres douces, boutons pill · encre `#0E0E12` ·
-**prix bleu `#1B63F2`** · barré rouge `#E5342A` · typo **Hanken Grotesk** · thème clair.
+**prix bleu `#1B63F2`** · barré rouge `#E5342A` · thème clair.
+**Typo (paire délibérée) :** corps en **Archivo** ; titres/hero/wordmark en **Archivo Expanded**
+(grotesque industrielle large, en capitales) pour une personnalité « perf/mécanique » — les noms
+de produits restent en casse normale, lisibles.
 
 ## Qualité / anti-« design IA » (audit Impeccable)
 
 Le thème a été passé au détecteur **Impeccable** (61 règles déterministes de tics « design IA »).
-Corrections appliquées : police passe-partout remplacée (Plus Jakarta Sans → **Hanken Grotesk**),
+Corrections appliquées : police passe-partout remplacée par une **paire délibérée Archivo / Archivo Expanded**,
 **contrastes** texte AA (gris secondaire assombri), **tailles de texte** remontées au-dessus des
 planchers de lisibilité (11/12 px), **ombres** resserrées (fin des ombres larges diffuses +
 bord fin, un tic génératif), easing **bounce** remplacé par un ease-out exponentiel, animations de
