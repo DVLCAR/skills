@@ -1,0 +1,45 @@
+<section class="sec--tight container" aria-label="{{ section.settings.title | default: 'Nos marques' | escape }}">
+  <div class="brands__row reveal">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.image != blank -%}
+        <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.name | escape, class: 'brand-logo-img' }}</div>
+      {%- else -%}
+        <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.name }}</div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marques",
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marque",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom" },
+        { "type": "image_picker", "id": "image", "label": "Logo (optionnel)" }
+      ]
+    }
+  ],
+  "max_blocks": 14,
+  "presets": [
+    {
+      "name": "Marques",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "AKRAPOVIČ" } },
+        { "type": "brand", "settings": { "name": "MALOSSI" } },
+        { "type": "brand", "settings": { "name": "POLINI" } },
+        { "type": "brand", "settings": { "name": "BREMBO" } },
+        { "type": "brand", "settings": { "name": "PUIG" } },
+        { "type": "brand", "settings": { "name": "RIZOMA" } },
+        { "type": "brand", "settings": { "name": "SC-PROJECT" } },
+        { "type": "brand", "settings": { "name": "BCD" } },
+        { "type": "brand", "settings": { "name": "QUAD LOCK" } },
+        { "type": "brand", "settings": { "name": "MOTUL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,50 @@
+<section class="sec container">
+  <div class="reviews__head reveal">
+    <div class="reviews__score"><span class="big">{{ section.settings.score | default: '4,8' }}</span><div><span class="stars">★★★★★</span><small>{{ section.settings.count_label | default: '1 240 avis vérifiés' }}</small></div></div>
+    {%- if section.settings.link_url != blank -%}<div style="margin-left:auto"><a class="link-arrow" href="{{ section.settings.link_url }}">{{ section.settings.link_label | default: 'Tous les avis' }} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>{%- endif -%}
+  </div>
+  <div class="rev-grid reveal">
+    {%- for block in section.blocks -%}
+      <figure class="review" {{ block.shopify_attributes }}>
+        <span class="stars" aria-label="{{ block.settings.stars | default: 5 }} sur 5">{% for i in (1..5) %}{% if i <= block.settings.stars %}★{% else %}☆{% endif %}{% endfor %}</span>
+        <p>« {{ block.settings.text }} »</p>
+        <figcaption class="review__who"><span class="avatar">{{ block.settings.name | slice: 0, 2 | upcase }}</span><div><b>{{ block.settings.name }}</b><span>{{ block.settings.meta }}</span></div><span class="review__vf">Achat vérifié</span></figcaption>
+      </figure>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "settings": [
+    { "type": "text", "id": "score", "label": "Note", "default": "4,8" },
+    { "type": "text", "id": "count_label", "label": "Sous-note", "default": "1 240 avis vérifiés" },
+    { "type": "text", "id": "link_label", "label": "Libellé lien", "default": "Tous les avis" },
+    { "type": "url", "id": "link_url", "label": "Lien" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Étoiles", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Commande reçue en 48h, pièces nickel pour mon 560." },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Kevin D." },
+        { "type": "text", "id": "meta", "label": "Machine / date", "default": "TMAX 560 · 2023" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Avis clients",
+      "blocks": [
+        { "type": "review", "settings": { "text": "Commande reçue en 48h, pièces nickel pour mon 560. Le sélecteur de compatibilité m'a évité une erreur.", "name": "Kevin D.", "meta": "TMAX 560 · 2023" } },
+        { "type": "review", "settings": { "text": "J'ai composé mon pack prépa sur le site puis fait monter à l'atelier. Service au top, prix carré.", "name": "Sofia L.", "meta": "TMAX 530 · 2018" } },
+        { "type": "review", "settings": { "stars": 4, "text": "Gros choix de pièces BCD et Rizoma. La navigation par modèle est hyper claire.", "name": "Mehdi B.", "meta": "TMAX 560 · 2022" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

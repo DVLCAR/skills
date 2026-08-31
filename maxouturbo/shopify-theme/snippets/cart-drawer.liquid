@@ -1,0 +1,19 @@
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer__head">
+    <h3>Panier · <span id="dCount">{{ cart.item_count }}</span></h3>
+    <button class="drawer__close" id="dClose" type="button" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="ship">
+    <div class="ship__txt" id="shipTxt"></div>
+    <div class="ship__bar"><div class="ship__fill" id="shipFill"></div></div>
+  </div>
+  <div class="drawer__items" id="dItems">
+    <p class="drawer__empty">Ton panier est vide.</p>
+  </div>
+  <div class="drawer__foot">
+    <div class="drawer__sub"><span>Sous-total</span><span class="amt" id="dSub">{{ cart.total_price | money }}</span></div>
+    <a class="btn btn--dark btn--block" href="{{ routes.cart_url }}">Passer commande</a>
+    <small>Taxes incluses · livraison calculée à l'étape suivante.</small>
+  </div>
+</aside>

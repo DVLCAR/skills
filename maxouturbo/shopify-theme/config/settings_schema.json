@@ -1,0 +1,37 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "TMAX Shop by MaxouTurbo",
+    "theme_version": "1.0.0",
+    "theme_author": "MaxouTurbo",
+    "theme_documentation_url": "https://maxouturbo.fr",
+    "theme_support_url": "https://maxouturbo.fr"
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "accent", "label": "Accent (prix, boutons bleus)", "default": "#1B63F2" }
+    ]
+  },
+  {
+    "name": "Logo & favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Réassurance & livraison",
+    "settings": [
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil livraison offerte (€)", "default": 50 }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" }
+    ]
+  }
+]

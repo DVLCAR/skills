@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "hero": { "type": "hero-finder", "settings": {} },
+    "explore": {
+      "type": "explore-tmax",
+      "blocks": {
+        "h1": { "type": "hotspot", "settings": { "label": "Variateur & transmission", "sub": "Malossi · Polini", "x": 33, "y": 64 } },
+        "h2": { "type": "hotspot", "settings": { "label": "Échappement", "sub": "Akrapovič · SC-Project", "x": 62, "y": 82 } },
+        "h3": { "type": "hotspot", "settings": { "label": "Freinage", "sub": "Brembo · disques", "x": 78, "y": 80 } },
+        "h4": { "type": "hotspot", "settings": { "label": "Esthétique & carbone", "sub": "Bulles · carénages", "x": 70, "y": 34 } },
+        "h5": { "type": "hotspot", "settings": { "label": "Cockpit", "sub": "Support tél · Quad Lock", "x": 80, "y": 22 } }
+      },
+      "block_order": ["h1", "h2", "h3", "h4", "h5"]
+    },
+    "brands": {
+      "type": "brand-logos",
+      "blocks": {
+        "b1": { "type": "brand", "settings": { "name": "AKRAPOVIČ" } },
+        "b2": { "type": "brand", "settings": { "name": "MALOSSI" } },
+        "b3": { "type": "brand", "settings": { "name": "POLINI" } },
+        "b4": { "type": "brand", "settings": { "name": "BREMBO" } },
+        "b5": { "type": "brand", "settings": { "name": "PUIG" } },
+        "b6": { "type": "brand", "settings": { "name": "RIZOMA" } },
+        "b7": { "type": "brand", "settings": { "name": "SC-PROJECT" } },
+        "b8": { "type": "brand", "settings": { "name": "BCD" } },
+        "b9": { "type": "brand", "settings": { "name": "QUAD LOCK" } },
+        "b10": { "type": "brand", "settings": { "name": "MOTUL" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10"]
+    },
+    "vedette": {
+      "type": "featured-products",
+      "settings": { "heading": "En vedette", "layout": "grid", "count": 4 },
+      "blocks": {
+        "t1": { "type": "tab", "settings": { "label": "TMAX 560" } },
+        "t2": { "type": "tab", "settings": { "label": "TMAX 530" } },
+        "t3": { "type": "tab", "settings": { "label": "TMAX 500" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "nouveaute": { "type": "featured-product", "settings": { "badge_text": "NOUVEAUTÉ · 2026" } },
+    "builder": {
+      "type": "prepa-builder",
+      "settings": { "heading": "Compose ta prépa TMAX 560", "discount": 10 },
+      "blocks": {
+        "p1": { "type": "part", "settings": { "preselected": true, "note": "Gain de son & de perf" } },
+        "p2": { "type": "part", "settings": { "preselected": true, "note": "Accélération franche" } },
+        "p3": { "type": "part", "settings": { "note": "Réglage optimal" } },
+        "p4": { "type": "part", "settings": { "note": "Meilleure respiration" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"]
+    },
+    "support": {
+      "type": "featured-products",
+      "settings": { "heading": "Support téléphone", "layout": "carousel", "count": 6 },
+      "blocks": {
+        "s1": { "type": "tab", "settings": { "label": "TMAX 560" } },
+        "s2": { "type": "tab", "settings": { "label": "TMAX 530" } },
+        "s3": { "type": "tab", "settings": { "label": "TMAX 500" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": { "score": "4,8", "count_label": "1 240 avis vérifiés" },
+      "blocks": {
+        "r1": { "type": "review", "settings": { "text": "Commande reçue en 48h, pièces nickel pour mon 560. Le sélecteur de compatibilité m'a évité une erreur.", "name": "Kevin D.", "meta": "TMAX 560 · 2023" } },
+        "r2": { "type": "review", "settings": { "text": "J'ai composé mon pack prépa sur le site puis fait monter à l'atelier. Service au top, prix carré.", "name": "Sofia L.", "meta": "TMAX 530 · 2018" } },
+        "r3": { "type": "review", "settings": { "stars": 4, "text": "Gros choix de pièces BCD et Rizoma. La navigation par modèle est hyper claire.", "name": "Mehdi B.", "meta": "TMAX 560 · 2022" } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "explore", "brands", "vedette", "nouveaute", "builder", "support", "reviews", "newsletter"]
+}

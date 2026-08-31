@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="theme-color" content="#ffffff">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 48, height: 48 }}">
+  {%- endif -%}
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;125,600;125,700;125,800&display=swap">
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {%- if settings.accent != blank -%}
+  <style>:root{ --blue: {{ settings.accent }}; }</style>
+  {%- endif -%}
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip" href="#MainContent">Aller au contenu</a>
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {% render 'cart-drawer' %}
+
+  <button class="chat" id="chat" aria-label="Chat" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg> Chat
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg">Ajouté au panier</span>
+  </div>
+
+  <script>
+    window.TMAX = {
+      routes: {
+        cart_add: "{{ routes.cart_add_url }}",
+        cart_change: "{{ routes.cart_change_url }}",
+        cart: "{{ routes.cart_url }}"
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      freeShip: {{ settings.free_shipping_threshold | default: 50 | times: 100 }},
+      strings: { added: "ajouté", freeUnlocked: "Livraison offerte débloquée ✓" }
+    };
+  </script>
+  {{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

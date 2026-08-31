@@ -1,0 +1,39 @@
+<div class="topbar">
+  <div class="topbar__in">
+    {%- for block in section.blocks -%}
+      {%- if forloop.index0 > 0 -%}<span class="dot" aria-hidden="true">•</span>{%- endif -%}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- else -%}
+      <span>Paiement en 4X sans frais</span><span class="dot">•</span>
+      <span>Livraison offerte dès {{ settings.free_shipping_threshold | default: 50 }} €</span><span class="dot">•</span>
+      <span>Expédition 24/48 h</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barre d'annonce",
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte", "default": "Livraison offerte dès 50 €" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Barre d'annonce",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Paiement en 4X sans frais" } },
+        { "type": "message", "settings": { "text": "Livraison offerte dès 50 €" } },
+        { "type": "message", "settings": { "text": "Expédition 24/48 h" } },
+        { "type": "message", "settings": { "text": "SAV & compatibilité par MaxouTurbo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

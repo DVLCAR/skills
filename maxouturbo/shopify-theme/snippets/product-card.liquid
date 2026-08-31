@@ -1,0 +1,39 @@
+{%- comment -%} Usage: {% render 'product-card', card_product: product %} {%- endcomment -%}
+{%- liquid
+  assign p = card_product
+  assign v = p.selected_or_first_available_variant
+  assign on_sale = false
+  if p.compare_at_price > p.price
+    assign on_sale = true
+  endif
+-%}
+<article class="card">
+  <div class="card__media">
+    {%- if p.available == false -%}
+      <span class="card__badge">Épuisé</span>
+    {%- elsif on_sale -%}
+      <span class="card__badge card__badge--promo">Promo</span>
+    {%- endif -%}
+    <a class="card__link" href="{{ p.url }}" aria-label="{{ p.title | escape }}"></a>
+    {%- if p.featured_media -%}
+      {{ p.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', widths: '260,340,440,600', sizes: '(max-width:720px) 45vw, 300px', class: 'card__img', alt: p.title | escape }}
+    {%- else -%}
+      <svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="50" width="56" height="22" rx="11"/><path d="M86 55l12 3v6l-12 3M30 61H16"/><path d="M42 50l4-8M58 50l4-8"/></svg>
+    {%- endif -%}
+    {%- if p.available and v -%}
+      <button class="card__add" type="button" data-add data-id="{{ v.id }}" aria-label="Ajouter au panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+    {%- endif -%}
+  </div>
+  <div class="card__info">
+    {%- if p.vendor != blank -%}<span class="card__brand">{{ p.vendor }}</span>{%- endif -%}
+    <a class="card__title" href="{{ p.url }}">{{ p.title }}</a>
+    <div class="card__price{% if on_sale %} is-sale{% endif %}">
+      {%- if p.price_varies -%}
+        <span class="now">Dès {{ p.price_min | money }}</span>
+      {%- else -%}
+        <span class="now">{{ p.price | money }}</span>
+      {%- endif -%}
+      {%- if on_sale -%}<span class="was">{{ p.compare_at_price | money }}</span>{%- endif -%}
+    </div>
+  </div>
+</article>

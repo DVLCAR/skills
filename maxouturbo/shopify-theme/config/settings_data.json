@@ -1,0 +1,12 @@
+{
+  "current": {
+    "accent": "#1B63F2",
+    "free_shipping_threshold": 50
+  },
+  "presets": {
+    "TMAX Shop": {
+      "accent": "#1B63F2",
+      "free_shipping_threshold": 50
+    }
+  }
+}

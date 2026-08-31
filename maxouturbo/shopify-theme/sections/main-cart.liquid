@@ -1,0 +1,45 @@
+<section class="sec container cart-page">
+  <h1 class="cart-title">Panier</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty">
+      <p>Ton panier est vide.</p>
+      <a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Découvrir la boutique</a>
+    </div>
+  {%- else -%}
+    {%- form 'cart', cart, class: 'cart-form' -%}
+      <div class="cart-lines">
+        {%- for item in cart.items -%}
+          <div class="cline">
+            <a class="cline__img" href="{{ item.url }}">
+              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.product.title | escape }}{%- endif -%}
+            </a>
+            <div class="cline__main">
+              <a class="cline__name" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}<div class="cline__opt">{{ item.variant.title }}</div>{%- endunless -%}
+              <div class="cline__price">{{ item.final_price | money }} <span class="cline__unit">/ pièce</span></div>
+              <div class="cline__row">
+                <input class="cline__qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" aria-label="Quantité pour {{ item.product.title | escape }}">
+                <a class="cline__rm" href="{{ item.url_to_remove }}">Retirer</a>
+              </div>
+            </div>
+            <div class="cline__total">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-foot">
+        <div class="cart-sub"><span>Sous-total</span><b>{{ cart.total_price | money }}</b></div>
+        <p class="cart-note">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
+        <div class="cart-buttons">
+          <button class="btn btn--light" type="submit" name="update">Mettre à jour</button>
+          <button class="btn btn--dark" type="submit" name="checkout">Passer commande</button>
+        </div>
+      </div>
+    {%- endform -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Panier", "settings": [] }
+{% endschema %}

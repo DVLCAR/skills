@@ -1,0 +1,22 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Aller au contenu",
+      "close": "Fermer",
+      "menu": "Menu"
+    },
+    "search": { "search": "Rechercher" },
+    "newsletter_form": { "email_placeholder": "ton@email.fr", "submit": "Je m'inscris" }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "on_sale": "Promo",
+      "from_price_html": "Dès {{ price }}"
+    }
+  },
+  "cart": {
+    "general": { "title": "Panier", "empty": "Ton panier est vide", "subtotal": "Sous-total", "checkout": "Passer commande", "remove": "Retirer" }
+  }
+}

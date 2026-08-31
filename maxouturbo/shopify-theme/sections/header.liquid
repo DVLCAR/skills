@@ -1,0 +1,98 @@
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+-%}
+<header class="header" id="header">
+  <div class="container header__in">
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — accueil">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 260 | image_tag: loading: 'eager', alt: shop.name, class: 'brand__logo' }}
+      {%- else -%}
+        <span class="brand__row"><span class="brand__t">{{ section.settings.brand_main | default: 'TMAX' }}</span><span class="brand__s">{{ section.settings.brand_accent | default: 'Shop' }}</span></span>
+        <span class="brand__by">{{ section.settings.brand_sub | default: 'by MaxouTurbo' }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <button class="nav__toggle" type="button" data-mega="m{{ forloop.index }}" aria-expanded="false" aria-haspopup="true">{{ link.title }} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        {%- else -%}
+          <a class="nav__link" href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="header__act">
+      <a class="iconbtn" href="{{ routes.search_url }}" aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></a>
+      <a class="iconbtn" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Mon compte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.9 3.6-6 8-6s8 2.1 8 6"/></svg></a>
+      <button class="iconbtn" id="cartBtn" type="button" aria-label="Panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h2l1.5 12.5a1.5 1.5 0 0 0 1.5 1.3h8.2a1.5 1.5 0 0 0 1.5-1.2L21 8H6.2"/><circle cx="9.5" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg><span class="cart-count{% if cart.item_count > 0 %} show{% endif %}" id="cartCount">{{ cart.item_count }}</span></button>
+      <button class="iconbtn burger" id="burger" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+
+  {%- comment -%} Méga-menus : un panneau par entrée de menu ayant des sous-liens {%- endcomment -%}
+  <div class="mega" id="mega">
+    {%- for link in menu.links -%}
+      {%- if link.links.size > 0 -%}
+      <div class="mega__panel" data-panel="m{{ forloop.index }}">
+        <div class="mega__in">
+          <div class="mm__cats">
+            <span class="mm__h">{{ link.title }} — catégories</span>
+            {%- for child in link.links -%}
+              <a class="mm__cat" href="{{ child.url }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                {{ child.title }}
+              </a>
+            {%- endfor -%}
+            <a class="mm__cat all" href="{{ link.url }}">Voir tout {{ link.title }} →</a>
+          </div>
+          <div class="mega__promo">
+            <span class="eyebrow">{{ link.title }}</span>
+            <h5>{{ section.settings.promo_title | default: 'Compatibilité vérifiée' }}</h5>
+            <p>{{ section.settings.promo_text | default: 'Choisis ta machine, on affiche les pièces qui vont dessus.' }}</p>
+            <a class="btn btn--dark btn--sm" href="{{ link.url }}">Voir {{ link.title }}</a>
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</header>
+
+<aside class="mobile" id="mobile" aria-label="Menu">
+  <div class="mobile__head"><span>Menu</span><button class="drawer__close" id="mClose" type="button" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="mobile__body">
+    {%- for link in menu.links -%}
+      {%- if link.links.size > 0 -%}
+      <div class="macc">
+        <button class="macc__t" type="button" data-acc>{{ link.title }} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="macc__p"><div class="macc__inner">
+          {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+          <a href="{{ link.url }}">Voir tout {{ link.title }}</a>
+        </div></div>
+      </div>
+      {%- else -%}
+        <a class="macc__solo" href="{{ link.url }}">{{ link.title }}</a>
+      {%- endif -%}
+    {%- endfor -%}
+    <a class="macc__solo" href="{{ routes.search_url }}">Rechercher</a>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu principal", "default": "main-menu",
+      "info": "Astuce : crée un menu avec des sous-menus (TMAX 560 → Échappement, Freinage…) pour obtenir les méga-menus déroulants." },
+    { "type": "image_picker", "id": "logo", "label": "Logo (optionnel)" },
+    { "type": "header", "content": "Wordmark (si pas de logo)" },
+    { "type": "text", "id": "brand_main", "label": "Texte 1", "default": "TMAX" },
+    { "type": "text", "id": "brand_accent", "label": "Texte 2 (accent)", "default": "Shop" },
+    { "type": "text", "id": "brand_sub", "label": "Sous-texte", "default": "by MaxouTurbo" },
+    { "type": "header", "content": "Méga-menu" },
+    { "type": "text", "id": "promo_title", "label": "Titre encart promo", "default": "Compatibilité vérifiée" },
+    { "type": "text", "id": "promo_text", "label": "Texte encart promo", "default": "Choisis ta machine, on affiche les pièces qui vont dessus." }
+  ]
+}
+{% endschema %}

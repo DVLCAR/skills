@@ -1,0 +1,30 @@
+<section class="sec container">
+  <h1 class="cart-title">Recherche</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Rechercher une pièce, une marque…" aria-label="Rechercher">
+    <input type="hidden" name="type" value="product">
+    <button class="btn btn--dark" type="submit">Rechercher</button>
+  </form>
+
+  {%- if search.performed -%}
+    <p class="coll-count" style="margin:1.2rem 0">{{ search.results_count }} résultat{% if search.results_count > 1 %}s{% endif %}{% if search.terms != blank %} pour « {{ search.terms }} »{% endif %}</p>
+    {%- if search.results.size > 0 -%}
+      {%- paginate search.results by 24 -%}
+      <div class="grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', card_product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <p class="coll-empty">Aucun résultat. Essaie un autre mot-clé.</p>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Recherche", "settings": [] }
+{% endschema %}

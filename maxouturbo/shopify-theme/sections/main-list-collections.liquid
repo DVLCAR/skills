@@ -1,0 +1,22 @@
+<section class="sec container">
+  <h1 class="cart-title">Collections</h1>
+  <div class="grid" style="margin-top:1.6rem">
+    {%- for collection in collections -%}
+      <a class="cc" href="{{ collection.url }}">
+        <div class="cc__media">
+          {%- if collection.featured_image -%}
+            {{ collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: collection.title | escape, class: 'card__img' }}
+          {%- endif -%}
+        </div>
+        <div class="card__info">
+          <span class="card__title">{{ collection.title }}</span>
+          <div class="card__price"><span class="cc__count">{{ collection.products_count }} produit{% if collection.products_count > 1 %}s{% endif %}</span></div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Liste des collections", "settings": [] }
+{% endschema %}

@@ -1,0 +1,80 @@
+{%- paginate collection.products by 24 -%}
+<div class="container coll-top">
+  <nav class="crumb"><a href="{{ routes.root_url }}">Accueil</a> <span>/</span> <b>{{ collection.title }}</b></nav>
+  <div class="coll-head">
+    <div>
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}<p class="sechead-sub muted" style="max-width:60ch;margin:.5rem 0 0">{{ collection.description | strip_html | truncatewords: 30 }}</p>{%- endif -%}
+    </div>
+    <div class="coll-tools">
+      <span class="coll-count">{{ collection.products_count }} produit{% if collection.products_count > 1 %}s{% endif %}</span>
+      <button class="btn btn--light btn--sm filt-toggle" id="filtToggle" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filtrer</button>
+      {%- if collection.sort_options.size > 0 -%}
+      <form method="get" class="coll-sort">
+        {%- for f in collection.filters -%}
+          {%- for v in f.active_values -%}<input type="hidden" name="{{ v.param_name }}" value="{{ v.value }}">{%- endfor -%}
+          {%- if f.type == 'price_range' -%}
+            {%- if f.min_value.value != null -%}<input type="hidden" name="{{ f.min_value.param_name }}" value="{{ f.min_value.value }}">{%- endif -%}
+            {%- if f.max_value.value != null -%}<input type="hidden" name="{{ f.max_value.param_name }}" value="{{ f.max_value.value }}">{%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <div class="select"><select name="sort_by" aria-label="Trier" onchange="this.form.submit()">
+          {%- for opt in collection.sort_options -%}<option value="{{ opt.value }}"{% if opt.value == collection.sort_by %} selected{% endif %}>{{ opt.name }}</option>{%- endfor -%}
+        </select></div>
+      </form>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="container coll">
+  {%- if collection.filters.size > 0 -%}
+  <aside class="filters" id="filters">
+    <div class="filters__head"><span>Filtres</span><button id="filtClose" type="button" aria-label="Fermer">✕</button></div>
+    <form method="get">
+      {%- for filter in collection.filters -%}
+        <div class="fgroup">
+          <h4>{{ filter.label }}</h4>
+          {%- case filter.type -%}
+            {%- when 'list', 'boolean' -%}
+              <div class="fcheck">
+                {%- for value in filter.values -%}
+                  <label{% if value.count == 0 and value.active == false %} class="is-empty"{% endif %}>
+                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %} onchange="window.location.href='{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}'">
+                    <span>{{ value.label }} <em>({{ value.count }})</em></span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            {%- when 'price_range' -%}
+              <div class="fprice">
+                <input type="number" inputmode="decimal" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value }}" placeholder="0" min="0" max="{{ filter.range_max | money_without_currency | remove: ',' }}" aria-label="Prix min">
+                <span>–</span>
+                <input type="number" inputmode="decimal" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value }}" placeholder="{{ filter.range_max | money_without_currency }}" min="0" max="{{ filter.range_max | money_without_currency | remove: ',' }}" aria-label="Prix max">
+                <button type="submit" class="btn btn--light btn--sm">OK</button>
+              </div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+      <a class="freset" href="{{ collection.url }}">Réinitialiser les filtres</a>
+    </form>
+  </aside>
+  {%- endif -%}
+
+  <div class="coll__main">
+    {%- if collection.products.size > 0 -%}
+      <div class="grid">
+        {%- for product in collection.products -%}{% render 'product-card', card_product: product %}{%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <div class="pagination">{{ paginate | default_pagination }}</div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="coll-empty">Aucun produit ne correspond à ces filtres.<br><a class="freset" href="{{ collection.url }}">Réinitialiser</a></div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

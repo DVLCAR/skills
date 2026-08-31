@@ -1,0 +1,73 @@
+{%- assign cur = product.selected_or_first_available_variant -%}
+<section class="sec container product-page">
+  <nav class="crumb">
+    <a href="{{ routes.root_url }}">Accueil</a> <span>/</span>
+    {%- if product.collections.first -%}<a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> <span>/</span> {%- endif -%}
+    <b>{{ product.title }}</b>
+  </nav>
+
+  <div class="product-grid">
+    <div class="product-gallery">
+      <div class="pg-main">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 1400 | image_tag: id: 'pgMain', class: 'pg-img', alt: product.title | escape, loading: 'eager' }}
+        {%- else -%}
+          <svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="width:40%;color:#c9c9d0"><rect x="30" y="50" width="56" height="22" rx="11"/><path d="M86 55l12 3v6l-12 3M30 61H16"/></svg>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+      <div class="pg-thumbs">
+        {%- for media in product.media -%}
+          <button class="pg-thumb" type="button" data-src="{{ media | image_url: width: 1400 }}">{{ media | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}</button>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-info">
+      {%- if product.vendor != blank -%}<span class="card__brand">{{ product.vendor }}</span>{%- endif -%}
+      <h1 class="product-title">{{ product.title }}</h1>
+
+      <div class="product-price{% if cur.compare_at_price > cur.price %} is-sale{% endif %}" id="pPrice">
+        <span class="now" id="pNow">{{ cur.price | money }}</span>
+        {%- if cur.compare_at_price > cur.price -%}<span class="was" id="pWas">{{ cur.compare_at_price | money }}</span>{%- endif -%}
+      </div>
+
+      <p class="product-avail">
+        {%- if product.available -%}<span class="stock">En stock</span>{%- else -%}<span class="stock stock--pre">Indisponible</span>{%- endif -%}
+      </p>
+
+      {%- form 'product', product, class: 'js-product-form product-form' -%}
+        {%- unless product.has_only_default_variant -%}
+        <div class="product-variant">
+          <label class="variant__label" for="pVariant">{{ product.options_with_values.first.name }}</label>
+          <div class="select"><select name="id" id="pVariant" data-variant-select>
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}"{% unless variant.available %} disabled{% endunless %}{% if variant.id == cur.id %} selected{% endif %}>{{ variant.title }}{% unless variant.available %} — épuisé{% endunless %}</option>
+            {%- endfor -%}
+          </select></div>
+        </div>
+        {%- else -%}
+        <input type="hidden" name="id" value="{{ cur.id }}">
+        {%- endunless -%}
+
+        <div class="product-actions">
+          <div class="qty qty--lg" data-qty>
+            <button type="button" data-qminus aria-label="Diminuer">−</button>
+            <input type="text" name="quantity" value="1" inputmode="numeric" pattern="[0-9]*" aria-label="Quantité" data-qval>
+            <button type="button" data-qplus aria-label="Augmenter">+</button>
+          </div>
+          <button class="btn btn--dark" type="submit"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Ajouter au panier{% else %}Épuisé{% endif %}</button>
+        </div>
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <div class="rte product-desc">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Produit", "settings": [] }
+{% endschema %}

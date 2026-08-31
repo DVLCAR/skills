@@ -1,0 +1,31 @@
+<section class="sec container">
+  <p><a class="link-arrow" href="{{ routes.account_url }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Mon compte</a></p>
+  <h1 class="cart-title">Commande {{ order.name }}</h1>
+  <p class="muted">Passée le {{ order.created_at | date: '%d/%m/%Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+
+  <div style="overflow-x:auto;margin-top:1.4rem">
+    <table class="acc-table">
+      <thead><tr><th>Produit</th><th>Prix</th><th>Qté</th><th>Total</th></tr></thead>
+      <tbody>
+        {%- for line in order.line_items -%}
+        <tr>
+          <td>{{ line.title }}</td>
+          <td>{{ line.price | money }}</td>
+          <td>{{ line.quantity }}</td>
+          <td>{{ line.final_line_price | money }}</td>
+        </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3">Sous-total</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+        {%- for shipping in order.shipping_methods -%}<tr><td colspan="3">Livraison ({{ shipping.title }})</td><td>{{ shipping.price | money }}</td></tr>{%- endfor -%}
+        <tr><td colspan="3"><b>Total</b></td><td><b>{{ order.total_net_amount | money }}</b></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="order-addr" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.6rem">
+    <div><h4 class="fcol-h">Adresse de livraison</h4>{{ order.shipping_address | format_address }}</div>
+    <div><h4 class="fcol-h">Adresse de facturation</h4>{{ order.billing_address | format_address }}</div>
+  </div>
+</section>

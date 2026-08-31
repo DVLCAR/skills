@@ -1,0 +1,13 @@
+<section class="sec container page-narrow" style="max-width:520px;text-align:center">
+  <h1 class="cart-title">Carte cadeau {{ shop.name }}</h1>
+  <p class="muted" style="margin-top:.6rem">Solde de la carte</p>
+  <div class="feature__price" style="justify-content:center;margin:.4rem 0"><span class="now" style="font-size:2.2rem">{{ gift_card.balance | money }}</span></div>
+  {%- if gift_card.balance != gift_card.initial_value -%}
+    <p class="muted">Valeur initiale : {{ gift_card.initial_value | money }}</p>
+  {%- endif -%}
+  <div class="giftcard-code">{{ gift_card.code | format_code }}</div>
+  {%- if gift_card.qr_identifier -%}
+    <img src="{{ gift_card.qr_identifier | payment_icon_png_url }}" alt="QR code" width="120" height="120" style="margin:1rem auto">
+  {%- endif -%}
+  <div style="margin-top:1.2rem"><a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Utiliser en boutique</a></div>
+</section>

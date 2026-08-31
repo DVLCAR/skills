@@ -1,0 +1,58 @@
+<section class="hero">
+  <div class="container hero__in">
+    <h1 class="reveal">{{ section.settings.title | escape }}</h1>
+    {%- if section.settings.subtitle != blank -%}<p class="hero__sub reveal">{{ section.settings.subtitle }}</p>{%- endif -%}
+
+    {%- if section.settings.show_finder -%}
+    <form class="finder reveal" id="finder" data-search="{{ routes.search_url }}">
+      <div class="finder__grid">
+        <div class="finder__field">
+          <label for="fMod">Modèle</label>
+          <div class="select"><select id="fMod" required>
+            <option value="" disabled selected>Sélectionner</option>
+            {%- assign mods = section.settings.model_options | newline_to_br | split: '<br />' -%}
+            {%- for m in mods -%}{%- assign mm = m | strip -%}{%- if mm != blank -%}<option>{{ mm }}</option>{%- endif -%}{%- endfor -%}
+          </select></div>
+        </div>
+        <div class="finder__field">
+          <label for="fYear">Année</label>
+          <div class="select"><select id="fYear">
+            <option value="" disabled selected>Sélectionner</option>
+            {%- assign yrs = section.settings.year_options | newline_to_br | split: '<br />' -%}
+            {%- for y in yrs -%}{%- assign yy = y | strip -%}{%- if yy != blank -%}<option>{{ yy }}</option>{%- endif -%}{%- endfor -%}
+          </select></div>
+        </div>
+        <div class="finder__field">
+          <label for="fCat">Catégorie</label>
+          <div class="select"><select id="fCat">
+            <option value="">Toutes les catégories</option>
+            {%- assign cats = section.settings.category_options | newline_to_br | split: '<br />' -%}
+            {%- for c in cats -%}{%- assign cc = c | strip -%}{%- if cc != blank -%}<option>{{ cc }}</option>{%- endif -%}{%- endfor -%}
+          </select></div>
+        </div>
+      </div>
+      <button class="btn btn--dark btn--block" type="submit">Rechercher</button>
+    </form>
+    {%- endif -%}
+
+    {%- if section.settings.trust != blank -%}
+    <div class="hero__trust reveal"><span class="stars">★★★★★</span><span>{{ section.settings.trust }}</span></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero + sélecteur",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Tout pour ton TMAX, au meilleur prix." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "TMAX 560, 530 et 500. Choisis ta machine, on t'affiche les pièces compatibles. Montage possible à l'atelier MaxouTurbo." },
+    { "type": "checkbox", "id": "show_finder", "label": "Afficher le sélecteur de véhicule", "default": true },
+    { "type": "textarea", "id": "model_options", "label": "Modèles (un par ligne)", "default": "TMAX 560\nTMAX 530\nTMAX 500" },
+    { "type": "textarea", "id": "year_options", "label": "Années (une par ligne)", "default": "2022 → aujourd'hui\n2020 – 2021\n2017 – 2019\n2015 – 2016\n2012 – 2014\n2008 – 2011\n2001 – 2007" },
+    { "type": "textarea", "id": "category_options", "label": "Catégories (une par ligne)", "default": "Échappement\nFreinage\nVariateur & transmission\nEsthétique & carbone\nEntretien\nSupport téléphone\nAccessoires" },
+    { "type": "text", "id": "trust", "label": "Ligne de réassurance", "default": "4,8/5 · 1 240 avis · Paiement 4x sans frais" }
+  ],
+  "presets": [{ "name": "Hero + sélecteur" }]
+}
+{% endschema %}

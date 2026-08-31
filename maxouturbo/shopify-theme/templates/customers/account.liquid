@@ -1,0 +1,31 @@
+<section class="sec container">
+  <div class="account-head">
+    <h1 class="cart-title">Mon compte</h1>
+    <a class="btn btn--light btn--sm" href="{{ routes.account_logout_url }}">Se déconnecter</a>
+  </div>
+  <p class="muted">Bonjour {{ customer.first_name | default: customer.email }}. <a href="{{ routes.account_addresses_url }}">Gérer mes adresses</a></p>
+
+  <h2 style="font-size:1.4rem;margin:2rem 0 1rem">Commandes</h2>
+  {%- paginate customer.orders by 12 -%}
+    {%- if customer.orders.size > 0 -%}
+      <div class="orders" style="overflow-x:auto">
+        <table class="acc-table">
+          <thead><tr><th>Commande</th><th>Date</th><th>Total</th><th>Statut</th></tr></thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+            <tr>
+              <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+              <td>{{ order.created_at | date: '%d/%m/%Y' }}</td>
+              <td>{{ order.total_net_amount | money }}</td>
+              <td>{{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- else -%}
+      <p class="muted">Aucune commande pour l'instant.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>

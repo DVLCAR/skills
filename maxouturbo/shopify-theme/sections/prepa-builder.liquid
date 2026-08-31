@@ -1,0 +1,75 @@
+<section class="sec container" id="builder">
+  <div class="builder reveal">
+    <div class="builder__in">
+      <div>
+        <div class="builder__head">
+          {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          <h2>{{ section.settings.heading | escape }}</h2>
+          {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+        </div>
+        <div class="parts" id="parts" data-discount="{{ section.settings.discount | default: 0 }}">
+          {%- for block in section.blocks -%}
+            {%- assign bp = all_products[block.settings.product] -%}
+            {%- if bp.id -%}
+              {%- assign bv = bp.selected_or_first_available_variant -%}
+              <label class="part{% if block.settings.preselected %} on{% endif %}" data-price="{{ bv.price }}" data-id="{{ bv.id }}" {{ block.shopify_attributes }}>
+                <span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="part__name">{{ bp.title }}{% if block.settings.note != blank %}<small>{{ block.settings.note }}</small>{% endif %}</span>
+                <span class="part__price">{{ bv.price | money }}</span>
+              </label>
+            {%- endif -%}
+          {%- else -%}
+            <p class="builder__note" style="text-align:left">Ajoute des blocs « Pièce » et sélectionne des produits pour composer le pack.</p>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="builder__panel">
+        <h3>{{ section.settings.panel_title | default: 'Ton pack' }}</h3>
+        <div class="bsum">
+          <div class="row"><span id="bCount">0 pièce</span><span id="bRaw">—</span></div>
+          {%- if section.settings.discount > 0 -%}<div class="row save"><span>Remise pack −{{ section.settings.discount }} %</span><span id="bSave">—</span></div>{%- endif -%}
+          <div class="total"><span>Total</span><b id="bTotal">—</b></div>
+        </div>
+        <button class="btn btn--blue btn--block" id="bAdd" type="button">Ajouter le pack au panier</button>
+        {%- if section.settings.note != blank -%}<p class="builder__note">{{ section.settings.note }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Compose ta prépa",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Configurateur" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Compose ta prépa TMAX 560" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Coche les pièces, le total se met à jour en direct. Ajoute le pack complet en un clic — montage possible à l'atelier MaxouTurbo." },
+    { "type": "text", "id": "panel_title", "label": "Titre du panneau", "default": "Ton pack" },
+    { "type": "range", "id": "discount", "label": "Remise pack indicative (%)", "min": 0, "max": 30, "step": 1, "default": 10 },
+    { "type": "text", "id": "note", "label": "Note", "default": "−10 % avec le code PREPA au panier" }
+  ],
+  "blocks": [
+    {
+      "type": "part",
+      "name": "Pièce",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produit" },
+        { "type": "text", "id": "note", "label": "Bénéfice (petite ligne)", "default": "" },
+        { "type": "checkbox", "id": "preselected", "label": "Pré-cochée", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Compose ta prépa",
+      "blocks": [
+        { "type": "part", "settings": { "preselected": true, "note": "Gain de son & de perf" } },
+        { "type": "part", "settings": { "preselected": true, "note": "Accélération franche" } },
+        { "type": "part", "settings": { "note": "Réglage optimal" } },
+        { "type": "part", "settings": { "note": "Meilleure respiration" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

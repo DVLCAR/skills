@@ -1,0 +1,42 @@
+<section class="sec container page-narrow">
+  <p><a class="link-arrow" href="{{ routes.account_url }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Mon compte</a></p>
+  <h1 class="cart-title">Mes adresses</h1>
+
+  <details class="account-details" style="margin-top:1rem">
+    <summary>Ajouter une adresse</summary>
+    {%- form 'customer_address', customer.new_address, class: 'account-form' -%}
+      <div class="field"><label>Prénom</label><input type="text" name="address[first_name]"></div>
+      <div class="field"><label>Nom</label><input type="text" name="address[last_name]"></div>
+      <div class="field"><label>Adresse</label><input type="text" name="address[address1]"></div>
+      <div class="field"><label>Complément</label><input type="text" name="address[address2]"></div>
+      <div class="field"><label>Ville</label><input type="text" name="address[city]"></div>
+      <div class="field"><label>Code postal</label><input type="text" name="address[zip]"></div>
+      <div class="field"><label>Pays</label><div class="select"><select name="address[country]">{{ all_country_option_tags }}</select></div></div>
+      <div class="field"><label>Téléphone</label><input type="tel" name="address[phone]"></div>
+      <button class="btn btn--dark btn--block" type="submit">Enregistrer</button>
+    {%- endform -%}
+  </details>
+
+  {%- for address in customer.addresses -%}
+    <div class="addr-card" style="border:1px solid var(--line);border-radius:14px;padding:1.2rem;margin-top:1.2rem">
+      {%- if address == customer.default_address -%}<span class="tag" style="margin-bottom:.5rem">Par défaut</span>{%- endif -%}
+      {{ address | format_address }}
+      <div style="display:flex;gap:.6rem;margin-top:.8rem">
+        <details class="account-details" style="margin:0">
+          <summary>Modifier</summary>
+          {%- form 'customer_address', address, class: 'account-form' -%}
+            <div class="field"><label>Adresse</label><input type="text" name="address[address1]" value="{{ address.address1 }}"></div>
+            <div class="field"><label>Ville</label><input type="text" name="address[city]" value="{{ address.city }}"></div>
+            <div class="field"><label>Code postal</label><input type="text" name="address[zip]" value="{{ address.zip }}"></div>
+            <div class="field"><label>Pays</label><div class="select"><select name="address[country]">{{ address.country | all_country_option_tags }}</select></div></div>
+            <button class="btn btn--dark btn--block" type="submit">Mettre à jour</button>
+          {%- endform -%}
+        </details>
+        {%- form 'customer_address', address -%}
+          <input type="hidden" name="_method" value="delete">
+          <button class="btn btn--light btn--sm" type="submit" onclick="return confirm('Supprimer cette adresse ?')">Supprimer</button>
+        {%- endform -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</section>
