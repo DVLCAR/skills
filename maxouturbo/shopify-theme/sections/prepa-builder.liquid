@@ -41,21 +41,68 @@
 {
   "name": "Compose ta prépa",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Configurateur" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Compose ta prépa TMAX 560" },
-    { "type": "textarea", "id": "text", "label": "Texte", "default": "Coche les pièces, le total se met à jour en direct. Ajoute le pack complet en un clic — montage possible à l'atelier MaxouTurbo." },
-    { "type": "text", "id": "panel_title", "label": "Titre du panneau", "default": "Ton pack" },
-    { "type": "range", "id": "discount", "label": "Remise pack indicative (%)", "min": 0, "max": 30, "step": 1, "default": 10 },
-    { "type": "text", "id": "note", "label": "Note", "default": "−10 % avec le code PREPA au panier" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "Configurateur"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Compose ta prépa TMAX 560"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Coche les pièces, le total se met à jour en direct. Ajoute le pack complet en un clic — montage possible à l'atelier MaxouTurbo."
+    },
+    {
+      "type": "text",
+      "id": "panel_title",
+      "label": "Titre du panneau",
+      "default": "Ton pack"
+    },
+    {
+      "type": "range",
+      "id": "discount",
+      "label": "Remise pack indicative (%)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "−10 % avec le code PREPA au panier"
+    }
   ],
   "blocks": [
     {
       "type": "part",
       "name": "Pièce",
       "settings": [
-        { "type": "product", "id": "product", "label": "Produit" },
-        { "type": "text", "id": "note", "label": "Bénéfice (petite ligne)", "default": "" },
-        { "type": "checkbox", "id": "preselected", "label": "Pré-cochée", "default": false }
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produit"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Bénéfice (petite ligne)",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "preselected",
+          "label": "Pré-cochée",
+          "default": false
+        }
       ]
     }
   ],
@@ -64,12 +111,64 @@
     {
       "name": "Compose ta prépa",
       "blocks": [
-        { "type": "part", "settings": { "preselected": true, "note": "Gain de son & de perf" } },
-        { "type": "part", "settings": { "preselected": true, "note": "Accélération franche" } },
-        { "type": "part", "settings": { "note": "Réglage optimal" } },
-        { "type": "part", "settings": { "note": "Meilleure respiration" } }
+        {
+          "type": "part",
+          "settings": {
+            "preselected": true,
+            "note": "Gain de son & de perf"
+          }
+        },
+        {
+          "type": "part",
+          "settings": {
+            "preselected": true,
+            "note": "Accélération franche"
+          }
+        },
+        {
+          "type": "part",
+          "settings": {
+            "note": "Réglage optimal"
+          }
+        },
+        {
+          "type": "part",
+          "settings": {
+            "note": "Meilleure respiration"
+          }
+        }
       ]
     }
-  ]
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "part",
+        "settings": {
+          "preselected": true,
+          "note": "Gain de son & de perf"
+        }
+      },
+      {
+        "type": "part",
+        "settings": {
+          "preselected": true,
+          "note": "Accélération franche"
+        }
+      },
+      {
+        "type": "part",
+        "settings": {
+          "note": "Réglage optimal"
+        }
+      },
+      {
+        "type": "part",
+        "settings": {
+          "note": "Meilleure respiration"
+        }
+      }
+    ]
+  }
 }
 {% endschema %}
