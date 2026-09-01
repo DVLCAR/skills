@@ -6,7 +6,7 @@
         <h2>{{ section.settings.heading | escape }}</h2>
         {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
         <div class="explore__chips">
-          {%- for block in section.blocks -%}<span class="chip">{{ block.settings.label }}</span>{%- endfor -%}
+          {%- for block in section.blocks -%}<span class="chip">{{ block.settings.label }}</span>{%- else -%}<span class="chip">Variateur &amp; transmission</span><span class="chip">Échappement</span><span class="chip">Freinage</span><span class="chip">Esthétique &amp; carbone</span><span class="chip">Cockpit</span>{%- endfor -%}
         </div>
       </div>
       <div class="stage" role="group" aria-label="Schéma interactif">
@@ -25,6 +25,12 @@
             <span class="hs__dot"></span>
             <span class="hs__pop"><b>{{ block.settings.label }}</b><span>{{ block.settings.sub }}</span><span class="go">Voir les pièces →</span></span>
           </a>
+        {%- else -%}
+          <a class="hs" style="left:33%;top:64%"><span class="hs__dot"></span><span class="hs__pop"><b>Variateur &amp; transmission</b><span>Malossi · Polini</span><span class="go">Voir les pièces →</span></span></a>
+          <a class="hs" style="left:62%;top:82%"><span class="hs__dot"></span><span class="hs__pop"><b>Échappement</b><span>Akrapovič · SC-Project</span><span class="go">Voir les pièces →</span></span></a>
+          <a class="hs" style="left:78%;top:80%"><span class="hs__dot"></span><span class="hs__pop"><b>Freinage</b><span>Brembo · disques</span><span class="go">Voir les pièces →</span></span></a>
+          <a class="hs" style="left:70%;top:34%"><span class="hs__dot"></span><span class="hs__pop"><b>Esthétique &amp; carbone</b><span>Bulles · carénages</span><span class="go">Voir les pièces →</span></span></a>
+          <a class="hs" style="left:80%;top:22%"><span class="hs__dot"></span><span class="hs__pop"><b>Cockpit</b><span>Support tél · Quad Lock</span><span class="go">Voir les pièces →</span></span></a>
         {%- endfor -%}
       </div>
     </div>
@@ -154,55 +160,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "hotspot",
-        "settings": {
-          "label": "Variateur & transmission",
-          "sub": "Malossi · Polini",
-          "x": 33,
-          "y": 64
-        }
-      },
-      {
-        "type": "hotspot",
-        "settings": {
-          "label": "Échappement",
-          "sub": "Akrapovič · SC-Project",
-          "x": 62,
-          "y": 82
-        }
-      },
-      {
-        "type": "hotspot",
-        "settings": {
-          "label": "Freinage",
-          "sub": "Brembo · disques",
-          "x": 78,
-          "y": 80
-        }
-      },
-      {
-        "type": "hotspot",
-        "settings": {
-          "label": "Esthétique & carbone",
-          "sub": "Bulles · carénages",
-          "x": 70,
-          "y": 34
-        }
-      },
-      {
-        "type": "hotspot",
-        "settings": {
-          "label": "Cockpit",
-          "sub": "Support tél · Quad Lock",
-          "x": 80,
-          "y": 22
-        }
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

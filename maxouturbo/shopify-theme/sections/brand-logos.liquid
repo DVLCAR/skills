@@ -6,6 +6,9 @@
       {%- else -%}
         <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.name }}</div>
       {%- endif -%}
+    {%- else -%}
+      {%- assign demo_brands = "AKRAPOVIČ,MALOSSI,POLINI,BREMBO,PUIG,RIZOMA,SC-PROJECT,BCD,QUAD LOCK,MOTUL" | split: ',' -%}
+      {%- for d in demo_brands -%}<div class="brandcard">{{ d }}</div>{%- endfor -%}
     {%- endfor -%}
   </div>
 </section>
@@ -98,70 +101,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "brand",
-        "settings": {
-          "name": "AKRAPOVIČ"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "MALOSSI"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "POLINI"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "BREMBO"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "PUIG"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "RIZOMA"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "SC-PROJECT"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "BCD"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "QUAD LOCK"
-        }
-      },
-      {
-        "type": "brand",
-        "settings": {
-          "name": "MOTUL"
-        }
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

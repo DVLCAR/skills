@@ -30,6 +30,12 @@
         {%- endfor -%}
       {%- endif -%}
     </div>
+  {%- else -%}
+    <div class="{% if is_carousel %}scroller{% else %}grid{% endif %} reveal">
+      {%- for i in (1..section.settings.count) -%}
+        <article class="card"><div class="card__media"><svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="50" width="56" height="22" rx="11"/><path d="M86 55l12 3v6l-12 3M30 61H16"/></svg></div><div class="card__info"><span class="card__brand">Marque</span><span class="card__title">Ajoute une collection à cet onglet</span><div class="card__price"><span class="now">—</span></div></div></article>
+      {%- endfor -%}
+    </div>
   {%- endfor -%}
 </section>
 
@@ -144,33 +150,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "settings": {
-      "heading": "En vedette",
-      "layout": "grid",
-      "count": 4
-    },
-    "blocks": [
-      {
-        "type": "tab",
-        "settings": {
-          "label": "TMAX 560"
-        }
-      },
-      {
-        "type": "tab",
-        "settings": {
-          "label": "TMAX 530"
-        }
-      },
-      {
-        "type": "tab",
-        "settings": {
-          "label": "TMAX 500"
-        }
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

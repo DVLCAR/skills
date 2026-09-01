@@ -10,6 +10,10 @@
         <p>« {{ block.settings.text }} »</p>
         <figcaption class="review__who"><span class="avatar">{{ block.settings.name | slice: 0, 2 | upcase }}</span><div><b>{{ block.settings.name }}</b><span>{{ block.settings.meta }}</span></div><span class="review__vf">Achat vérifié</span></figcaption>
       </figure>
+    {%- else -%}
+      <figure class="review"><span class="stars">★★★★★</span><p>« Commande reçue en 48h, pièces nickel pour mon 560. Le sélecteur de compatibilité m'a évité une erreur. »</p><figcaption class="review__who"><span class="avatar">KE</span><div><b>Kevin D.</b><span>TMAX 560 · 2023</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
+      <figure class="review"><span class="stars">★★★★★</span><p>« J'ai composé mon pack prépa sur le site puis fait monter à l'atelier. Service au top, prix carré. »</p><figcaption class="review__who"><span class="avatar">SO</span><div><b>Sofia L.</b><span>TMAX 530 · 2018</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
+      <figure class="review"><span class="stars">★★★★☆</span><p>« Gros choix de pièces BCD et Rizoma. La navigation par modèle est hyper claire. »</p><figcaption class="review__who"><span class="avatar">ME</span><div><b>Mehdi B.</b><span>TMAX 560 · 2022</span></div><span class="review__vf">Achat vérifié</span></figcaption></figure>
     {%- endfor -%}
   </div>
 </section>
@@ -109,35 +113,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "review",
-        "settings": {
-          "text": "Commande reçue en 48h, pièces nickel pour mon 560. Le sélecteur de compatibilité m'a évité une erreur.",
-          "name": "Kevin D.",
-          "meta": "TMAX 560 · 2023"
-        }
-      },
-      {
-        "type": "review",
-        "settings": {
-          "text": "J'ai composé mon pack prépa sur le site puis fait monter à l'atelier. Service au top, prix carré.",
-          "name": "Sofia L.",
-          "meta": "TMAX 530 · 2018"
-        }
-      },
-      {
-        "type": "review",
-        "settings": {
-          "stars": 4,
-          "text": "Gros choix de pièces BCD et Rizoma. La navigation par modèle est hyper claire.",
-          "name": "Mehdi B.",
-          "meta": "TMAX 560 · 2022"
-        }
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

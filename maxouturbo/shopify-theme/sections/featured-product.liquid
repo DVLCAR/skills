@@ -1,4 +1,5 @@
-{%- assign fp = all_products[section.settings.product] -%}
+{%- assign fp = null -%}
+{%- if section.settings.product != blank -%}{%- assign fp = all_products[section.settings.product] -%}{%- endif -%}
 <section class="sec--tight container">
   <div class="feature reveal">
     <div class="feature__in">

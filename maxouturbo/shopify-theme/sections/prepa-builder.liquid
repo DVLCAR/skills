@@ -9,7 +9,8 @@
         </div>
         <div class="parts" id="parts" data-discount="{{ section.settings.discount | default: 0 }}">
           {%- for block in section.blocks -%}
-            {%- assign bp = all_products[block.settings.product] -%}
+            {%- assign bp = null -%}
+            {%- if block.settings.product != blank -%}{%- assign bp = all_products[block.settings.product] -%}{%- endif -%}
             {%- if bp.id -%}
               {%- assign bv = bp.selected_or_first_available_variant -%}
               <label class="part{% if block.settings.preselected %} on{% endif %}" data-price="{{ bv.price }}" data-id="{{ bv.id }}" {{ block.shopify_attributes }}>
@@ -19,7 +20,10 @@
               </label>
             {%- endif -%}
           {%- else -%}
-            <p class="builder__note" style="text-align:left">Ajoute des blocs « Pièce » et sélectionne des produits pour composer le pack.</p>
+            <label class="part on"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Échappement homologué<small>Gain de son &amp; de perf</small></span><span class="part__price">—</span></label>
+            <label class="part on"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Kit variateur<small>Accélération franche</small></span><span class="part__price">—</span></label>
+            <label class="part"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Galets &amp; ressort<small>Réglage optimal</small></span><span class="part__price">—</span></label>
+            <label class="part"><span class="part__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="part__name">Filtre à air sport<small>Meilleure respiration</small></span><span class="part__price">—</span></label>
           {%- endfor -%}
         </div>
       </div>
@@ -139,36 +143,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "part",
-        "settings": {
-          "preselected": true,
-          "note": "Gain de son & de perf"
-        }
-      },
-      {
-        "type": "part",
-        "settings": {
-          "preselected": true,
-          "note": "Accélération franche"
-        }
-      },
-      {
-        "type": "part",
-        "settings": {
-          "note": "Réglage optimal"
-        }
-      },
-      {
-        "type": "part",
-        "settings": {
-          "note": "Meilleure respiration"
-        }
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}
