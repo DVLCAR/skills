@@ -4,7 +4,7 @@
   <div class="grid" style="margin-top:1.6rem">
     {%- for article in blog.articles -%}
       <a class="cc" href="{{ article.url }}">
-        <div class="cc__media">{%- if article.image -%}{{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title | escape, class: 'card__img' }}{%- endif -%}</div>
+        <div class="cc__media">{%- if article.image -%}{{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title, class: 'card__img' }}{%- endif -%}</div>
         <div class="card__info">
           <span class="card__brand">{{ article.published_at | date: '%d %b %Y' }}</span>
           <span class="card__title">{{ article.title }}</span>

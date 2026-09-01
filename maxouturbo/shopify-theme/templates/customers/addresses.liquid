@@ -28,7 +28,7 @@
             <div class="field"><label>Adresse</label><input type="text" name="address[address1]" value="{{ address.address1 }}"></div>
             <div class="field"><label>Ville</label><input type="text" name="address[city]" value="{{ address.city }}"></div>
             <div class="field"><label>Code postal</label><input type="text" name="address[zip]" value="{{ address.zip }}"></div>
-            <div class="field"><label>Pays</label><div class="select"><select name="address[country]">{{ address.country | all_country_option_tags }}</select></div></div>
+            <div class="field"><label>Pays</label><div class="select"><select name="address[country]" data-default="{{ address.country | escape }}">{{ all_country_option_tags }}</select></div></div>
             <button class="btn btn--dark btn--block" type="submit">Mettre à jour</button>
           {%- endform -%}
         </details>
@@ -40,3 +40,8 @@
     </div>
   {%- endfor -%}
 </section>
+<script>
+  document.querySelectorAll('select[name="address[country]"][data-default]').forEach(function (s) {
+    if (s.dataset.default) { s.value = s.dataset.default; }
+  });
+</script>

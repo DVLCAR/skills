@@ -6,10 +6,13 @@
       <input type="hidden" name="contact[tags]" value="newsletter">
       <input type="email" name="contact[email]" id="newsEmail" placeholder="{{ section.settings.placeholder | default: 'ton@email.fr' }}" aria-label="Adresse e-mail" required autocorrect="off" autocapitalize="off">
       <button class="btn btn--blue" type="submit" name="commit">{{ section.settings.button | default: "Je m'inscris" }}</button>
+      {%- if form.posted_successfully? -%}
+        <div class="news__ok show"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> {{ section.settings.success | default: 'Merci ! Ton code de bienvenue arrive par e-mail.' }}</div>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <small style="color:var(--red)">{{ form.errors | default_errors }}</small>
+      {%- endif -%}
     {%- endform -%}
-    {%- if form.posted_successfully? -%}
-      <div class="news__ok show"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> {{ section.settings.success | default: 'Merci ! Ton code de bienvenue arrive par e-mail.' }}</div>
-    {%- endif -%}
     {%- if section.settings.small != blank -%}<small>{{ section.settings.small }}</small>{%- endif -%}
   </div>
 </section>

@@ -2,7 +2,7 @@
   <div class="brands__row reveal">
     {%- for block in section.blocks -%}
       {%- if block.settings.image != blank -%}
-        <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.name | escape, class: 'brand-logo-img' }}</div>
+        <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.name, class: 'brand-logo-img' }}</div>
       {%- else -%}
         <div class="brandcard" {{ block.shopify_attributes }}>{{ block.settings.name }}</div>
       {%- endif -%}

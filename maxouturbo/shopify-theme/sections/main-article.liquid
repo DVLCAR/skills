@@ -2,7 +2,7 @@
   <nav class="crumb"><a href="{{ routes.root_url }}">Accueil</a> <span>/</span> <a href="{{ blog.url }}">{{ blog.title }}</a> <span>/</span> <b>{{ article.title }}</b></nav>
   <h1 class="cart-title" style="margin-top:.6rem">{{ article.title }}</h1>
   <p class="card__brand" style="margin-bottom:1.2rem">{{ article.published_at | date: '%d %B %Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</p>
-  {%- if article.image -%}<div class="cc__media" style="aspect-ratio:16/9;margin-bottom:1.5rem">{{ article.image | image_url: width: 1400 | image_tag: alt: article.title | escape, class: 'card__img' }}</div>{%- endif -%}
+  {%- if article.image -%}<div class="cc__media" style="aspect-ratio:16/9;margin-bottom:1.5rem">{{ article.image | image_url: width: 1400 | image_tag: alt: article.title, class: 'card__img' }}</div>{%- endif -%}
   <div class="rte">{{ article.content }}</div>
 </article>
 

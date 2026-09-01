@@ -5,7 +5,7 @@
       <a class="cc" href="{{ collection.url }}">
         <div class="cc__media">
           {%- if collection.featured_image -%}
-            {{ collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: collection.title | escape, class: 'card__img' }}
+            {{ collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: collection.title, class: 'card__img' }}
           {%- endif -%}
         </div>
         <div class="card__info">

@@ -10,7 +10,7 @@
         </div>
         {%- endif -%}
         {%- if fp.featured_media -%}
-          {{ fp.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', alt: fp.title | escape, class: 'feature__img' }}
+          {{ fp.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', alt: fp.title, class: 'feature__img' }}
         {%- else -%}
           <svg class="art" viewBox="0 0 220 150" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M40 96c-14-6-20-20-14-34 12 2 22 10 26 24"/><path d="M52 86l16-30 10 6-14 32"/><path d="M180 96c14-6 20-20 14-34-12 2-22 10-26 24"/><path d="M168 86l-16-30-10 6 14 32"/><path d="M74 100h72"/></svg>
         {%- endif -%}

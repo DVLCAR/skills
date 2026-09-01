@@ -6,8 +6,5 @@
     <p class="muted">Valeur initiale : {{ gift_card.initial_value | money }}</p>
   {%- endif -%}
   <div class="giftcard-code">{{ gift_card.code | format_code }}</div>
-  {%- if gift_card.qr_identifier -%}
-    <img src="{{ gift_card.qr_identifier | payment_icon_png_url }}" alt="QR code" width="120" height="120" style="margin:1rem auto">
-  {%- endif -%}
   <div style="margin-top:1.2rem"><a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Utiliser en boutique</a></div>
 </section>
