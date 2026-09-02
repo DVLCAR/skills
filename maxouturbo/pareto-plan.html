@@ -1,0 +1,322 @@
+<title>TMAX Shop 80/20</title>
+<meta name="description" content="Les 20 % d'actions qui finissent 80 % de la boutique TMAX Shop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#ffffff; --tile:#f4f4f7; --tile-2:#ececf1;
+    --ink:#101014; --ink-2:#585862; --ink-3:#84848e;
+    --line:#e8e8ee; --line-2:#dcdce4;
+    --blue:#1b63f2; --blue-ink:#1550d0; --blue-wash:#eef3ff;
+    --red:#e5342a; --red-wash:#fdeceb;
+    --ok:#17924e; --ok-wash:#e9f6ee;
+    --shadow:0 1px 2px rgba(16,16,20,.04),0 8px 24px rgba(16,16,20,.05);
+    --font:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --disp:"Archivo","Arial Narrow",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d0d11; --panel:#15151b; --tile:#17171e; --tile-2:#1e1e27;
+      --ink:#f3f3f6; --ink-2:#a7a7b2; --ink-3:#7c7c88;
+      --line:#26262f; --line-2:#33333e;
+      --blue:#5b8bff; --blue-ink:#84a6ff; --blue-wash:#151d31;
+      --red:#ff6a60; --red-wash:#2a1512;
+      --ok:#41c07e; --ok-wash:#10231a;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d0d11; --panel:#15151b; --tile:#17171e; --tile-2:#1e1e27;
+    --ink:#f3f3f6; --ink-2:#a7a7b2; --ink-3:#7c7c88;
+    --line:#26262f; --line-2:#33333e;
+    --blue:#5b8bff; --blue-ink:#84a6ff; --blue-wash:#151d31;
+    --red:#ff6a60; --red-wash:#2a1512;
+    --ok:#41c07e; --ok-wash:#10231a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(1.4rem,4vw,3.2rem) clamp(1.1rem,4vw,2rem) 5rem}
+  a{color:var(--blue-ink);text-underline-offset:2px}
+
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-ink);margin:0 0 .8rem}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(2rem,6vw,3.3rem);line-height:.98;
+    letter-spacing:-.02em;text-transform:uppercase;margin:0;text-wrap:balance}
+  h1 .slash{color:var(--blue)}
+  .lede{font-size:clamp(1.02rem,2.4vw,1.22rem);color:var(--ink-2);max-width:60ch;margin:1.1rem 0 0;line-height:1.5}
+  .lede b{color:var(--ink);font-weight:700}
+
+  /* status strip */
+  .status{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+  .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .75rem;border-radius:999px;
+    font-size:.82rem;font-weight:600;border:1px solid var(--line-2);background:var(--panel)}
+  .pill .dot{width:.5rem;height:.5rem;border-radius:50%}
+  .pill--ok{background:var(--ok-wash);border-color:transparent;color:var(--ok)}
+  .pill--ok .dot{background:var(--ok)}
+  .pill--todo{background:var(--red-wash);border-color:transparent;color:var(--red)}
+  .pill--todo .dot{background:var(--red)}
+
+  /* pareto bar */
+  .pareto{margin:2.4rem 0 .6rem;border:1px solid var(--line);border-radius:16px;background:var(--panel);
+    box-shadow:var(--shadow);padding:1.3rem 1.4rem}
+  .pareto h2{margin:0 0 1rem;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+  .prow{display:grid;grid-template-columns:7.5rem 1fr;align-items:center;gap:.9rem;margin:.55rem 0}
+  .prow .lab{font-size:.82rem;font-weight:600;color:var(--ink-2)}
+  .track{height:26px;border-radius:8px;background:var(--tile-2);overflow:hidden;position:relative}
+  .fill{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 .6rem;
+    font-size:.74rem;font-weight:700;color:#fff;white-space:nowrap}
+  .fill--sm{width:20%;background:var(--blue)}
+  .fill--lg{width:80%;background:linear-gradient(90deg,var(--blue),var(--blue-ink))}
+  .pnote{margin:.9rem 0 0;font-size:.82rem;color:var(--ink-3)}
+
+  .sec-h{display:flex;align-items:baseline;gap:.7rem;margin:2.8rem 0 .2rem}
+  .sec-h h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;
+    font-size:1.28rem;margin:0}
+  .sec-h .cnt{font-size:.8rem;color:var(--ink-3);font-weight:600}
+  .sec-sub{color:var(--ink-2);font-size:.94rem;margin:.35rem 0 1.3rem}
+
+  /* action cards */
+  .cards{display:flex;flex-direction:column;gap:.9rem}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:var(--shadow);
+    padding:1.15rem 1.25rem;display:grid;grid-template-columns:2.7rem 1fr;gap:.2rem 1rem}
+  .rank{font-family:var(--disp);font-weight:800;font-size:1.9rem;line-height:1;color:var(--blue);
+    font-variant-numeric:tabular-nums}
+  .card.core{border-left:3px solid var(--blue)}
+  .head{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem}
+  .head h3{font-size:1.06rem;font-weight:700;margin:0;letter-spacing:-.01em}
+  .meta{grid-column:2;display:flex;flex-wrap:wrap;gap:.4rem;margin:.55rem 0 .1rem}
+  .tag{display:inline-flex;align-items:center;gap:.35rem;font-size:.74rem;font-weight:700;
+    padding:.24rem .55rem;border-radius:7px;letter-spacing:.01em}
+  .tag--toi{background:var(--blue-wash);color:var(--blue-ink)}
+  .tag--moi{background:var(--tile-2);color:var(--ink-2)}
+  .tag--block{background:var(--red-wash);color:var(--red)}
+  .tag--eff{background:var(--tile);color:var(--ink-2);border:1px solid var(--line-2)}
+  .impact{display:inline-flex;align-items:center;gap:.3rem;font-size:.74rem;font-weight:700;color:var(--ink-3)}
+  .impact i{width:.5rem;height:.5rem;border-radius:50%;background:var(--line-2);display:inline-block}
+  .impact i.on{background:var(--blue)}
+  .why{grid-column:2;color:var(--ink);font-size:.96rem;margin:.5rem 0 0}
+  .why b{color:var(--blue-ink)}
+  .steps{grid-column:2;margin:.7rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.4rem}
+  .steps li{position:relative;padding-left:1.2rem;font-size:.9rem;color:var(--ink-2);line-height:1.45}
+  .steps li::before{content:"";position:absolute;left:.05rem;top:.55em;width:.42rem;height:.42rem;
+    border-radius:50%;background:var(--blue);opacity:.55}
+  .steps code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82em;
+    background:var(--tile-2);padding:.08rem .4rem;border-radius:5px;color:var(--ink)}
+
+  /* wait list */
+  .wait{margin-top:1.1rem;border:1px dashed var(--line-2);border-radius:14px;padding:1.15rem 1.3rem;background:var(--tile)}
+  .wait ul{margin:.2rem 0 0;padding-left:1.1rem;columns:2;column-gap:2rem}
+  .wait li{margin:.3rem 0;font-size:.92rem;color:var(--ink-2)}
+  .wait .kick{margin:.9rem 0 0;font-size:.9rem;color:var(--ink-3);font-style:italic}
+
+  /* order timeline */
+  .plan{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem}
+  .slot{display:grid;grid-template-columns:9.5rem 1fr;gap:1rem;align-items:start;
+    border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:.85rem 1.05rem}
+  .slot .when{font-weight:700;font-size:.86rem;color:var(--blue-ink)}
+  .slot .what{font-size:.94rem;color:var(--ink)}
+  .slot .what span{color:var(--ink-3);font-weight:700}
+
+  .mine{margin-top:1.1rem;border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:12px;
+    background:var(--ok-wash);padding:1.05rem 1.25rem}
+  .mine h3{margin:0 0 .4rem;font-size:1rem}
+  .mine p{margin:.25rem 0;font-size:.93rem;color:var(--ink-2)}
+  .mine b{color:var(--ink)}
+
+  footer{margin-top:3rem;padding-top:1.3rem;border-top:1px solid var(--line);
+    color:var(--ink-3);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+  @media (max-width:560px){
+    .card{grid-template-columns:1fr}
+    .rank{font-size:1.4rem}
+    .meta,.why,.steps{grid-column:1}
+    .prow{grid-template-columns:5.2rem 1fr}
+    .wait ul{columns:1}
+    .slot{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .fill{transition:width .8s cubic-bezier(.2,.7,.2,1)}
+  }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">TMAX Shop by MaxouTurbo · Plan de lancement</p>
+  <h1>Les 20&nbsp;<span class="slash">%</span> qui finissent<br>80&nbsp;<span class="slash">%</span> du site</h1>
+  <p class="lede">Le thème est en ligne et fonctionne. Ce qui reste, ce n'est pas du code&nbsp;— c'est du <b>contenu et de la configuration</b>. Voici les <b>7 actions à fort levier</b> : fais-les, et la boutique passe de « squelette de démo » à « vraie boutique prête à vendre ».</p>
+
+  <div class="status">
+    <span class="pill pill--ok"><span class="dot"></span>Thème&nbsp;: publié · 0 erreur</span>
+    <span class="pill pill--todo"><span class="dot"></span>Contenu&nbsp;: à remplir</span>
+    <span class="pill pill--todo"><span class="dot"></span>Paiement&nbsp;: à activer</span>
+  </div>
+
+  <div class="pareto">
+    <h2>Le principe</h2>
+    <div class="prow"><span class="lab">Tes efforts</span>
+      <div class="track"><div class="fill fill--sm">les 7 leviers</div></div></div>
+    <div class="prow"><span class="lab">Le résultat</span>
+      <div class="track"><div class="fill fill--lg">boutique prête à ~80&nbsp;%</div></div></div>
+    <p class="pnote">Une poignée d'actions (produits, collections, menu, branchement) fait l'essentiel du rendu visuel et fonctionnel. Le reste (blog, avis, e-mails, SEO fin) attend d'avoir vendu tes premières pièces.</p>
+  </div>
+
+  <div class="sec-h"><h2>Le cœur</h2><span class="cnt">fait ~80 % du visuel</span></div>
+  <p class="sec-sub">Les 4 leviers qui remplissent les grilles vides et font vivre la navigation. À faire dans cet ordre.</p>
+
+  <div class="cards">
+
+    <article class="card core">
+      <div class="rank">1</div>
+      <div class="head"><h3>Ajouter les produits (avec photos)</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Effort&nbsp;: gros</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+      <p class="why">Le levier n°1, tu l'as dit. Chaque produit avec photo remplace un emplacement gris par du vrai visuel&nbsp;: grilles, produit vedette, recherche, prépa. <b>Vise 15 à 30 produits</b> pour un premier rendu crédible.</p>
+      <ul class="steps">
+        <li>Admin → <code>Produits</code> → <code>Ajouter</code>&nbsp;: titre, description courte, <b>prix</b> et <b>prix comparé</b> (le barré rouge s'affiche tout seul).</li>
+        <li>Renseigne le <b>Fournisseur</b> (Akrapovič, Malossi, Brembo…)&nbsp;: il s'affiche comme marque sur la fiche.</li>
+        <li>1 à 3 <b>photos nettes sur fond clair</b>. Commence par tes best-sellers 560.</li>
+      </ul>
+    </article>
+
+    <article class="card core">
+      <div class="rank">2</div>
+      <div class="head"><h3>Créer les collections (modèles + catégories)</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Effort&nbsp;: moyen</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+      <p class="why">Les collections alimentent <b>le sélecteur de véhicule, les onglets d'accueil, le méga-menu et les pages catégories</b>. Sans elles, la moitié des liens ne mènent nulle part.</p>
+      <ul class="steps">
+        <li><code>Produits → Collections → Créer</code>. Par modèle&nbsp;: <code>tmax-560</code>, <code>tmax-530</code>, <code>tmax-500</code>.</li>
+        <li>Par catégorie&nbsp;: <code>echappement</code>, <code>freinage</code>, <code>variateur-transmission</code>, <code>esthetique</code>, <code>entretien</code>, <code>support-telephone</code>.</li>
+        <li>Automatiques (par tag / fournisseur) pour gagner du temps, sinon manuelles. Affecte chaque produit à son modèle + sa catégorie.</li>
+      </ul>
+    </article>
+
+    <article class="card core">
+      <div class="rank">3</div>
+      <div class="head"><h3>Construire le menu (méga-menu)</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Effort&nbsp;: ~20 min</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+      </div>
+      <p class="why">C'est ce qui remplace le menu par défaut (Accueil/Catalogue/Contact) par ta <b>navigation signature qui se déroule</b>, et fait pointer chaque lien vers une vraie collection.</p>
+      <ul class="steps">
+        <li><code>Boutique en ligne → Navigation → main-menu</code>.</li>
+        <li>Entrées de 1<sup>er</sup> niveau&nbsp;: <b>TMAX 560 · TMAX 530 · TMAX 500 · Marques · Promos</b>.</li>
+        <li>Dans chaque entrée, ajoute des <b>sous-liens</b> vers les collections catégories&nbsp;: ce sont eux qui remplissent le panneau déroulant.</li>
+      </ul>
+    </article>
+
+    <article class="card core">
+      <div class="rank">4</div>
+      <div class="head"><h3>Brancher les sections d'accueil</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Effort&nbsp;: éditeur</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+      </div>
+      <p class="why">Transforme le <b>squelette de démo</b> (cartes « — », « Ajoute une collection ») en vrai contenu, sans toucher au code.</p>
+      <ul class="steps">
+        <li><code>Personnaliser</code> → <b>Produits vedettes</b>&nbsp;: relie chaque onglet (560/530/500) à une collection.</li>
+        <li><b>Produit vedette</b>&nbsp;: choisis le produit à mettre en avant. <b>Compose ta prépa</b>&nbsp;: relie 4 à 6 produits.</li>
+        <li><b>Explore ton TMAX</b>&nbsp;: mets un lien de collection sur chaque point. <b>Marques</b>&nbsp;: importe les logos.</li>
+      </ul>
+    </article>
+
+  </div>
+
+  <div class="sec-h"><h2>Indispensables au lancement</h2><span class="cnt">pour vendre & inspirer confiance</span></div>
+  <p class="sec-sub">Moins « visuels », mais on ne met pas une boutique en ligne sans eux.</p>
+
+  <div class="cards">
+
+    <article class="card">
+      <div class="rank">5</div>
+      <div class="head"><h3>Paiement + livraison</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--block">Bloquant vente</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+      <p class="why">Sans ça, tu ne peux <b>littéralement pas encaisser</b>. C'est le vrai « fini » d'une boutique.</p>
+      <ul class="steps">
+        <li><code>Réglages → Paiements</code>&nbsp;: active Shopify Payments (ou Stripe/PayPal). Le <b>4x sans frais</b> via Klarna/Alma si tu veux tenir la promesse de la barre d'annonce.</li>
+        <li><code>Réglages → Livraison</code>&nbsp;: zone France, tarifs, et <b>« gratuite dès 50 € »</b> pour coller au bandeau.</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="rank">6</div>
+      <div class="head"><h3>Pages & mentions légales</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Shopify aide</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+      </div>
+      <p class="why">Requis pour la confiance, les liens du pied de page, et l'<b>activation du paiement</b> (les prestataires les exigent).</p>
+      <ul class="steps">
+        <li><code>Réglages → Mentions légales</code>&nbsp;: génère CGV, confidentialité, retours/remboursement, mentions. Shopify te donne des modèles.</li>
+        <li><code>Pages → Ajouter</code>&nbsp;: <b>Contact</b> (modèle contact) et <b>À propos</b> (l'atelier d'Auriol). Relie-les au menu bas de page (<code>footer</code>).</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="rank">7</div>
+      <div class="head"><h3>Logo, favicon & coordonnées</h3></div>
+      <div class="meta">
+        <span class="tag tag--toi">Toi</span>
+        <span class="tag tag--eff">Effort&nbsp;: ~10 min</span>
+        <span class="impact">Impact <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+      </div>
+      <p class="why">La touche finale de marque&nbsp;: peu d'effort, gros effet de sérieux.</p>
+      <ul class="steps">
+        <li><code>Personnaliser → Réglages du thème</code>&nbsp;: logo, favicon, couleur d'accent, seuil de livraison, réseaux (Insta / TikTok / FB / YT).</li>
+        <li><code>Réglages → Coordonnées</code> de la boutique (Auriol, 13).</li>
+      </ul>
+    </article>
+
+  </div>
+
+  <div class="sec-h"><h2>Ce qui peut attendre</h2><span class="cnt">les 80 % à faible levier</span></div>
+  <p class="sec-sub">Utile plus tard, mais ça ne rapproche presque pas du « site fini ». N'y touche pas avant tes premières ventes.</p>
+  <div class="wait">
+    <ul>
+      <li>Articles de blog & SEO de contenu</li>
+      <li>App d'avis produits (Judge.me, Loox)</li>
+      <li>E-mails automatiques (panier abandonné, bienvenue)</li>
+      <li>Réglage fin des filtres (Search &amp; Discovery)</li>
+      <li>Multi-langue / multi-devises / marchés</li>
+      <li>Codes promo au-delà du lancement</li>
+      <li>Retouches design & sections en plus</li>
+      <li>Tableaux de bord analytics avancés</li>
+    </ul>
+    <p class="kick">Chacun ajoute quelques % — pas les 80 % que font les 7 leviers du haut.</p>
+  </div>
+
+  <div class="sec-h"><h2>Ordre conseillé</h2><span class="cnt">un week-end</span></div>
+  <div class="plan">
+    <div class="slot"><div class="when">Jour 1 · matin</div><div class="what"><span>2 + 3 —</span> Collections puis menu. Tu poses le squelette de navigation.</div></div>
+    <div class="slot"><div class="when">Jour 1 · après-midi</div><div class="what"><span>1 —</span> Produits + photos. Le gros morceau&nbsp;: bloque 3-4 h dessus.</div></div>
+    <div class="slot"><div class="when">Jour 2 · matin</div><div class="what"><span>4 + 7 —</span> Brancher les sections dans l'éditeur, logo & coordonnées.</div></div>
+    <div class="slot"><div class="when">Jour 2 · après-midi</div><div class="what"><span>5 + 6 —</span> Paiement, livraison, pages légales → commande test → en ligne.</div></div>
+  </div>
+
+  <div class="mine">
+    <h3>Ce dont je m'occupe (moi)</h3>
+    <p><b>Le thème est fini et validé</b> (0 erreur, accueil/produit/collection/panier/compte OK).</p>
+    <p>Dès que tu as tes produits, je peux <b>pré-brancher les sections</b>, t'aider à créer les <b>collections automatiques</b> (par tag/fournisseur), et ajuster le design à la demande. Le thème n'attend plus que ton contenu.</p>
+  </div>
+
+  <footer>
+    <span>TMAX Shop by MaxouTurbo — Auriol (13)</span>
+    <span>Priorité par levier · 20 % des actions → 80 % du résultat</span>
+  </footer>
+</div>
